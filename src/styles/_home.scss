@@ -3,10 +3,8 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-.max-bound {
+.global-container {
     position: relative;
-    max-width: 1632px;
-    margin: 0 auto;
 }
 
 .main-header {
@@ -50,6 +48,7 @@ body {
     font-size: 32px;
     font-weight: 800;
     color: #fff;
+    cursor: pointer;
 }
 
 .home-navigation__circle {

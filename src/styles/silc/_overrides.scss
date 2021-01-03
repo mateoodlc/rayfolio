@@ -1,0 +1,36 @@
+/*
+ * silc variable overrides
+ *
+ */
+
+$silc-core--breakpoints: (
+    ("400", "(min-width: 400px)"),
+    ("550", "(min-width: 550px)"),
+    ("600", "(min-width: 600px)"),
+    ("700", "(min-width: 700px)"),
+    ("800", "(min-width: 800px)"),
+    ("900", "(min-width: 900px)"),
+    ("950", "(min-width: 950px)"),
+    ("1100", "(min-width: 1100px)"),
+    ("1200", "(min-width: 1200px)"),
+    ("1400", "(min-width: 1400px)"),
+    ("1440", "(min-width: 1440px)"),
+    ("1600", "(min-width: 1600px)"),
+    ("1850", "(min-width: 1850px)")
+);
+
+$silc-accordion__label-padding: 1rem;
+$silc-accordion__label-background: #f1f1f1;
+$silc-accordion__content-padding: 1rem;
+$silc-accordion__label--hover-background: #ccc;
+$silc-accordion__label--active-background: #eee;
+$silc-accordion__content-border: 1px solid #eee;
+
+$silc-nav__link--expanded--child-background: #eee;
+$silc-nav__link--expanded-padding: 1rem;
+$silc-nav__link--expanded--hover-background: #ccc;
+$silc-nav__link--expanded--child--hover-background: #ccc;
+
+.silc-nav {
+    background: #eee;
+}

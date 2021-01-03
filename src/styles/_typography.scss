@@ -5,6 +5,12 @@ h1 {
     color: $yellow;
 }
 
+h2 {
+    font-size: 128px;
+    font-weight: 800;
+    color: #000;
+}
+
 p {
     color: #fff;
     font-size: 24px;
@@ -17,4 +23,18 @@ a {
     font-weight: 500;
     color: $gray;
     text-decoration: none;
+}
+
+blockquote {
+    color: #000;
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 16px;
+}
+
+cite {
+    color: #000;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: normal;
 }

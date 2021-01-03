@@ -1,0 +1,64 @@
+.back-button {
+
+}
+
+.about__hero {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 224px;
+    padding-left: 138px;
+}
+
+.about__image {
+    width: 28%;
+    height: 0;
+    padding-top: 35%;
+    background-color: $gray;
+}
+
+.about__inspirational-phrase {
+    width: 260px;
+    align-self: flex-start;
+    text-align: left;
+}
+
+.about__content {
+    position: relative;
+    margin-top: 280px;
+}
+
+.content__description {
+    width: 100%;
+    p {
+        width: 536px;
+        font-size: 20px;
+        color: #000;
+        margin: 0 auto;
+        text-align: left;
+    }
+}
+
+.about__me {
+    margin-top: rem(96);
+}
+
+.about__me__item-list {
+    padding-top: 16px;
+    li {
+        text-align: left;
+        margin-bottom: 12px;
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+    &.about__me__item-list--strong {
+        li {
+            font-weight: 900;
+        }
+    }
+}

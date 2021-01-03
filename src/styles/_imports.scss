@@ -1,9 +1,9 @@
-@import './home.scss';
+@import './base.scss';
 @import './colors.scss';
+@import "silc/overrides";
+@import "~silc-core/src/scss/index.scss";
+@import "~silc-grid/src/scss/index.scss";
 @import './typography.scss';
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@import './layout.scss';
+@import './home.scss';
+@import './about.scss';
