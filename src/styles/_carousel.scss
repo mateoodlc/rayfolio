@@ -4,7 +4,7 @@
  left: 0;
  overflow: hidden;
  height: 100vh;
- background-color: #fff;
+ z-index: 1;
  .max-bound {
   padding-bottom: 0;
   min-height: auto;
@@ -67,7 +67,6 @@
  overflow-x: scroll;
  width: 100%;
  padding: 2.25rem 15% 0 12%;
- background-color: #fff;
 }
 
 .carousel__container {

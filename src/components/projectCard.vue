@@ -19,7 +19,7 @@ export default {
   name: 'project-card',
   props: {
     projectData: {
-      type: Array,
+      type: Object,
       required: true
     },
     test: {
@@ -33,7 +33,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$props.projectData)
   },
 }
 </script>
