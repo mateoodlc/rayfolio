@@ -1,0 +1,167 @@
+.carousel__main-container {
+ position: absolute;
+ top: 0;
+ left: 0;
+ overflow: hidden;
+ height: 100vh;
+ background-color: #fff;
+ .max-bound {
+  padding-bottom: 0;
+  min-height: auto;
+ }
+}
+
+.carousel__main-container {
+ .back-button {
+  top: rem(150);
+  left: calc(5% + #{rem(32)});
+ }
+}
+
+.carousel-indicator {
+ position: relative;
+ left: 50%;
+ transform: translateX(-50%);
+ text-align: center;
+}
+
+.carousel-indicator__line {
+ position: relative;
+ width: rem(180);
+ height: rem(2);
+ background-color: $gray;
+ vertical-align: middle;
+ margin: 0 16px;
+ margin-top: rem(-5);
+}
+
+.carousel-indicator__line span {
+ position: absolute;
+ top: 50%;
+ left: 0;
+ width: 100%;
+ height: rem(15);
+ background-color: $black;
+ transform-origin: left;
+ transform: translateY(-50%) scale(0.2);
+}
+
+.carousel-indicator__line,
+.carousel-indicator__number {
+ display: inline-block;
+ p {
+  font-weight: 300;
+  font-family: "Montserrat";
+  color: $black;
+ }
+}
+
+.carousel__title {
+ position: relative;
+ margin-top: rem(16);
+ left: 5%;
+}
+
+.carousel__outer-container {
+ position: relative;
+ overflow-x: scroll;
+ width: 100%;
+ padding: 2.25rem 15% 0 12%;
+ background-color: #fff;
+}
+
+.carousel__container {
+ position: relative;
+ display: flex;
+ flex-direction: row;
+ flex-wrap: nowrap;
+ min-width: rem(1920);
+ margin-bottom: rem(40);
+ &::after {
+  content: "";
+  display: block;
+  position: relative;
+  min-width: rem(200);
+  height: rem(100);
+ }
+}
+
+.carousel__element {
+ position: relative;
+ width: 80.4%;
+ margin-right: rem(256);
+ min-width: rem(1088);
+ &:last-of-type {
+  margin-right: 0;
+ }
+}
+
+.carousel__element::before {
+ content: "";
+ display: block;
+ position: relative;
+ width: 100%;
+ height: 0;
+ padding-top: 60%;
+}
+
+.carousel__element-title {
+ position: absolute;
+ top: 50%;
+ transform: translateY(-50%);
+ text-align: center;
+ z-index: 1;
+ .h1 {
+  position: relative;
+ }
+}
+
+.carouel__element-title__line {
+ display: block;
+ position: absolute;
+ left: 0;
+ top: -6px;
+ width: 100%;
+ height: rem(2);
+ background-color: $gray;
+}
+
+.carousel__element-subtitle {
+ position: relative;
+ display: block;
+ font-size: 32px;
+ font-weight: 300;
+ text-transform: uppercase;
+ margin-bottom: 16px;
+ text-align: center;
+}
+
+.carousel__element-image {
+ position: absolute;
+ top: 50%;
+ right: 0;
+ transform: translateY(-50%);
+ width: rem(600);
+ height: rem(600);
+ background-color: #eeeeee;
+}
+
+h3.carousel__element-number {
+ position: absolute;
+ top: 0;
+ right: rem(16);
+ transform: translateY(-50%);
+ font-size: 88px;
+ font-weight: 500;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.carousel__outer-container::-webkit-scrollbar {
+ display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.carousel__outer-container {
+ -ms-overflow-style: none; /* IE and Edge */
+ scrollbar-width: none; /* Firefox */
+}

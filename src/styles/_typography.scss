@@ -1,40 +1,76 @@
-h1 {
-    font-size: 72px;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: $yellow;
+@font-face {
+ font-family: "akira_expandedsuper_bold";
+ src: url("assets/fonts/akira_expanded_demo-webfont.woff2") format("woff2"),
+  url("assets/fonts/akira_expanded_demo-webfont.woff") format("woff");
+ font-weight: normal;
+ font-style: normal;
+}
+
+h1,
+.h1,
+h3 {
+ font-family: "akira_expandedsuper_bold";
+ font-weight: 800;
+ text-transform: uppercase;
+ color: $yellow;
+}
+
+h1,
+.h1 {
+ font-size: 72px;
+ &.h1--dark {
+  color: $black;
+ }
+}
+
+h1.bordered-heading,
+.h1.bordered-heading {
+ color: $yellow;
+ -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+ -webkit-text-stroke-width: 2px;
+ -webkit-text-stroke-color: $yellow;
+}
+
+h1.h1--large,
+.h1.h1--large {
+ font-size: 128px;
 }
 
 h2 {
-    font-size: 128px;
-    font-weight: 800;
-    color: #000;
+ font-size: 128px;
+ font-weight: 800;
+ color: $black;
+}
+
+h3 {
+ font-size: 40px;
 }
 
 p {
-    color: #fff;
-    font-size: 24px;
-    font-weight: 300;
-    line-height: (29/24);
+ color: #fff;
+ font-size: 24px;
+ font-weight: 300;
+ line-height: (29/24);
+ font-family: "Montserrat";
 }
 
 a {
-    font-size: 24px;
-    font-weight: 500;
-    color: $gray;
-    text-decoration: none;
+ font-size: 24px;
+ font-weight: 500;
+ color: $gray;
+ text-decoration: none;
 }
 
 blockquote {
-    color: #000;
-    font-size: 20px;
-    font-weight: 900;
-    margin-bottom: 16px;
+ color: #000;
+ font-size: 20px;
+ font-weight: 900;
+ margin-bottom: 16px;
 }
 
 cite {
-    color: #000;
-    font-size: 20px;
-    font-weight: 300;
-    font-style: normal;
+ color: #000;
+ font-size: 20px;
+ font-weight: 300;
+ font-style: normal;
 }

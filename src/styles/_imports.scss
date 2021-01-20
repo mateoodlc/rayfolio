@@ -1,9 +1,11 @@
-@import './base.scss';
-@import './colors.scss';
+@import "./base.scss";
+@import "./colors.scss";
 @import "silc/overrides";
 @import "~silc-core/src/scss/index.scss";
 @import "~silc-grid/src/scss/index.scss";
-@import './typography.scss';
-@import './layout.scss';
-@import './home.scss';
-@import './about.scss';
+@import "./typography.scss";
+@import "./layout.scss";
+@import "./home.scss";
+@import "./about.scss";
+@import "./project";
+@import "./carousel";

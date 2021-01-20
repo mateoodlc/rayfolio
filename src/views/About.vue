@@ -1,6 +1,6 @@
 <template>
   <div class="about max-bound">
-    <button class="back-button">back</button>
+    <button @click="hasHistory() ? $router.go(-1) : $router.push('/')" class="back-button" to="/">back</button>
     <div class="about__hero">
       <h2>Hello!</h2>
       <div class="about__image"></div>
@@ -15,7 +15,7 @@
       </div>
       <div class="about__me">
         <div class="silc-grid">
-          <div class="silc-grid__col silc-grid__col--4-1200"><h1>Hobbies</h1></div>
+          <div class="silc-grid__col silc-grid__col--4-1200"><h3>Hobbies</h3></div>
           <div class="silc-grid__col silc-grid__col--4-1200">
             <ul class="about__me__item-list">
               <li>Painting</li>

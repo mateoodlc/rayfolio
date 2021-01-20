@@ -1,64 +1,85 @@
 .back-button {
-
+ position: absolute;
+ top: rem(60);
+ left: rem(32);
+ color: $gray;
+ font-size: rem(24);
+ font-family: "Montserrat";
+ z-index: 1;
+ &::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: rem(-24);
+  width: rem(10);
+  height: rem(10);
+  transform: translateY(-50%) rotate(45deg);
+  border-left: rem(2) solid $black;
+  border-bottom: rem(2) solid $black;
+ }
 }
 
 .about__hero {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-top: 224px;
-    padding-left: 138px;
+ position: relative;
+ display: flex;
+ flex-direction: row;
+ flex-wrap: wrap;
+ justify-content: space-between;
+ align-items: center;
+ width: 100%;
+ padding-top: 224px;
+ padding-left: 138px;
+ h2 {
+  font-weight: 700;
+ }
 }
 
 .about__image {
-    width: 28%;
-    height: 0;
-    padding-top: 35%;
-    background-color: $gray;
+ width: 28%;
+ height: 0;
+ padding-top: 35%;
+ background-color: $gray;
 }
 
 .about__inspirational-phrase {
-    width: 260px;
-    align-self: flex-start;
-    text-align: left;
+ width: 260px;
+ align-self: flex-start;
+ text-align: left;
 }
 
 .about__content {
-    position: relative;
-    margin-top: 280px;
+ position: relative;
+ margin-top: 280px;
 }
 
 .content__description {
-    width: 100%;
-    p {
-        width: 536px;
-        font-size: 20px;
-        color: #000;
-        margin: 0 auto;
-        text-align: left;
-    }
+ width: 100%;
+ p {
+  width: 536px;
+  font-size: 20px;
+  color: $black;
+  margin: 0 auto;
+  text-align: left;
+ }
 }
 
 .about__me {
-    margin-top: rem(96);
+ margin-top: rem(96);
 }
 
 .about__me__item-list {
-    padding-top: 16px;
-    li {
-        text-align: left;
-        margin-bottom: 12px;
-        &:last-of-type {
-            margin-bottom: 0;
-        }
-    }
-    &.about__me__item-list--strong {
-        li {
-            font-weight: 900;
-        }
-    }
+ padding-top: 16px;
+ li {
+  text-align: left;
+  margin-bottom: 12px;
+  &:last-of-type {
+   margin-bottom: 0;
+  }
+ }
+ &.about__me__item-list--strong {
+  li {
+   font-weight: 900;
+  }
+ }
 }

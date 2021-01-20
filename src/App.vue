@@ -1,12 +1,29 @@
 <template>
-  <div id="app">
-    <router-view/>
+  <div id="app"> 
+    <div class="pointer-circle" ref="circleRef"></div>
+    <div class="pointer" ref="pointer"></div>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
   </div>
 </template>
 
+<script>
+import hasHistoryVue from './mixins/hasHistory.vue';
+import Vue from 'vue';
+export default {
+  name: "App",
+  mounted() {
+    console.log('app script is alive');
+  },
+  mixins: [hasHistoryVue],
+}
+Vue.mixin(hasHistoryVue);
+</script>
+
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  background-color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -25,3 +42,32 @@
   }
 }
 </style>
+
+<script>
+export default {
+  mounted() {
+    this.addEvents();
+  },
+  methods: {
+    addEvents() {
+      window.addEventListener("mousemove", event => {
+        this.followPointer(event);
+      });
+    },
+    followPointer(e) {
+      this.rawX = e.clientX;
+      this.rawY = e.clientY;
+      this.halfW = window.innerWidth / 2;
+      this.halfH = window.innerHeight / 2 - window.scrollY;
+      gsap.to(this.$refs.circleRef, 0.5, {
+        x: this.rawX - this.halfW,
+        y: this.rawY - this.halfH
+      });
+      gsap.to(this.$refs.pointer, 0, {
+        x: this.rawX - this.halfW,
+        y: this.rawY - this.halfH
+      });
+    },
+  }
+}
+</script>
