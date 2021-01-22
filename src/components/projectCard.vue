@@ -1,20 +1,31 @@
 <template>
-<keep-alive>
   <router-link :to="`/`" class="carousel__element">
     <div class="carousel__element-title">
-      <span class="carousel__element-subtitle">{{this.getData.subtitle}}</span>
-      <div class="h1 h1--dark">{{this.getData.title}}
-        <span class="carouel__element-title__line"></span>
+      <div class="masked-animation__wrapper">
+        <span class="carousel__element-subtitle masked-animation__element" ref="subtitleRef">{{this.getData.subtitle}}
+        </span>
+      </div>
+        <span class="carouel__element-title__line" ref="lineRef"></span>
+      <div class="masked-animation__wrapper">
+        <div class="h1 h1--dark masked-animation__element" ref="titleRef">{{this.getData.title}}
+        </div>
       </div>
     </div>
-    <div class="carousel__element-image">
-      <h3 class="carousel__element-number">01</h3>
+    <div class="carousel__element-image__wrapper">
+      <div class="carousel__element-image" ref="imageRef">
+      </div>
+      <div class="carousel__element-number__wrapper">
+        <h3 class="carousel__element-number">
+            <span class="masked-animation__element" ref="numberRef1">0</span>  
+            <span class="masked-animation__element" ref="numberRef2">1</span>
+        </h3>
+      </div>
     </div>
   </router-link>
-</keep-alive>
 </template>
 
 <script>
+import gsap from 'gsap'
 export default {
   name: 'project-card',
   props: {
@@ -33,6 +44,12 @@ export default {
     }
   },
   mounted() {
+    gsap.fromTo(this.$refs.imageRef, 1.5, {scaleY: 0}, {scaleY: 1, ease: 'power3.out', delay: 1});
+    gsap.fromTo(this.$refs.lineRef, 1.5, {scaleX: '0'}, {scaleX: 1, ease: 'power3.out', delay: 1});
+    gsap.fromTo(this.$refs.subtitleRef, 1, {y: '120%'}, {y: '0%', ease: 'power3.inOut', delay: 1.5});
+    gsap.fromTo(this.$refs.titleRef, 1, {y: '-120%'}, {y: '0%', ease: 'power3.inOut', delay: 1.5,});
+    gsap.fromTo(this.$refs.numberRef1, 0.5, {opacity: 0}, {opacity: 1, ease: 'power3.out', delay: 1.8});
+    gsap.fromTo(this.$refs.numberRef2, 0.5, {y: '10px', opacity: 0}, {y: '0', opacity: 1, ease: 'power3.out', delay: 2});
   },
 }
 </script>

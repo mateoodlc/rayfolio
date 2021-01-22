@@ -21,7 +21,10 @@
  background-color: #000;
 }
 
-.about.max-bound::before,
+.about.max-bound::before {
+ background-color: transparent;
+}
+
 .project.max-bound::before {
  background-color: #fff;
 }

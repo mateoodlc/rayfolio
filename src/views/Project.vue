@@ -21,11 +21,11 @@
 
 <script>
 
-import { enterTransition } from "../animations/routerTransition";
+/* import { enterTransition } from "../animations/routerTransition"; */
 export default {
     name: 'project',
     mounted() {
-        enterTransition(this.$refs.projectRef, 'top').play();
+        /* enterTransition(this.$refs.projectRef, 'top').play(); */
     }
 }
 </script>

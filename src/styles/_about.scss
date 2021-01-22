@@ -1,4 +1,24 @@
-.back-button {
+.view-wave {
+ z-index: 1;
+}
+
+.about {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+}
+
+.about__main-container {
+ position: relative;
+ z-index: 1;
+ &::before {
+  background-color: transparent;
+ }
+}
+
+.back-button span {
  position: absolute;
  top: rem(60);
  left: rem(32);
@@ -40,6 +60,7 @@
  height: 0;
  padding-top: 35%;
  background-color: $gray;
+ transform-origin: bottom;
 }
 
 .about__inspirational-phrase {

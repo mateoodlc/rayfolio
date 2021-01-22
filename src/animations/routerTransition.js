@@ -1,18 +1,20 @@
+/* eslint-disable no-unused-vars */
 import { gsap } from 'gsap';
-import { Timeline } from 'gsap/gsap-core';
 
-/* const animationEase = 'power4.inOut'; */
+const animationEase = 'power4.inOut';
 
-const enterTransition = (element, direction, onCompleteParam) => {
-  const directions = {
-    top: 'inset(100% 0% 0% 0%)',
-    right: 'inset(0% 100% 0% 0%)',
-    bottom: 'inset(0% 0% 100% 0%)',
-    left: 'inset(0% 0% 0% 100%)',
-  }
-  const tween = gsap.fromTo(element, 2, { webkitClipPath: directions[direction], clipPath: directions[direction] }, { webkitClipPath: 'inset(0% 0% 0% 0%)', clipPath: 'inset(0% 0% 0% 0%)', delay: 0, ease: 'power3.out', onComplete: onCompleteParam });
-  const tl = new Timeline();
+const horizontalTransition = (element, origin) => {
+  element.style.transformOrigin = origin;
+  const tween = gsap.fromTo(element, 2, {scaleX: 0}, { scaleX: 1, ease: animationEase });
+  const tl = gsap.timeline({ paused: true });
   return tl.add(tween);
 }
 
-export { enterTransition };
+const verticalTransition = (element, origin, onCompleteParam) => {
+  element.style.transformOrigin = origin;
+  const tween = gsap.fromTo(element, 2, { scaleY: 0 }, { scaleY: 1, ease: animationEase });
+  const tl = gsap.timeline({paused: true,  onComplete: onCompleteParam});
+  return tl.add(tween);
+}
+
+export { horizontalTransition, verticalTransition };

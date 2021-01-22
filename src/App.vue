@@ -14,7 +14,6 @@ import Vue from 'vue';
 export default {
   name: "App",
   mounted() {
-    console.log('app script is alive');
   },
   mixins: [hasHistoryVue],
 }

@@ -4,8 +4,8 @@
       <div class="global-container">
         <header class="main-header">
           <img class="logo" alt="Vue logo" src="../assets/logo.svg">
-          <div class="masked-animation__wrapper masked-animation__wrapper">
-            <router-link to="/about" class="masked-animation__element about" ref="aboutBtnRef">about</router-link>
+          <div class="masked-animation__wrapper">
+            <router-link to="/about" class="masked-animation__element about-link" ref="aboutBtnRef">about</router-link>
           </div>
         </header>
         <main class="main-container">
@@ -76,8 +76,7 @@ export default {
   components: {
   },
   mounted() {
-    console.log(this.$refs.aboutBtnRef.$el);
-    getMainTimeline(this.returnAnimateElements()).play();
+    getMainTimeline(this.returnAnimateElements()).play(0.1);
   },
   methods: {
     returnAnimateElements() {
