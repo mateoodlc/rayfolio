@@ -3,6 +3,10 @@ body {
  font-family: "Montserrat", sans-serif;
 }
 
+.home.max-bound {
+ min-height: 100vh;
+}
+
 .global-container {
  position: relative;
 }

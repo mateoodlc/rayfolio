@@ -1,8 +1,8 @@
 <template>
-  <router-link :to="`/`" class="carousel__element">
+  <router-link to="/carousel/project" class="carousel__element">
     <div class="carousel__element-title">
       <div class="masked-animation__wrapper">
-        <span class="carousel__element-subtitle masked-animation__element" ref="subtitleRef">{{this.getData.subtitle}}
+        <span class="carousel__element-subtitle masked-animation__element" ref="subtitleRef">{{this.getData.title}}
         </span>
       </div>
         <span class="carouel__element-title__line" ref="lineRef"></span>
@@ -27,7 +27,7 @@
 <script>
 import gsap from 'gsap'
 export default {
-  name: 'project-card',
+  name: 'projectCard',
   props: {
     projectData: {
       type: Object,

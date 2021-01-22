@@ -18,6 +18,10 @@
  }
 }
 
+.about__main-container.max-bound {
+ min-height: initial;
+}
+
 .back-button span {
  position: absolute;
  top: rem(60);
@@ -78,7 +82,7 @@
  width: 100%;
  p {
   width: 536px;
-  font-size: 20px;
+  font-size: rem(24);
   color: $black;
   margin: 0 auto;
   text-align: left;
@@ -87,11 +91,15 @@
 
 .about__me {
  margin-top: rem(96);
+ h3 {
+  opacity: 0;
+ }
 }
 
 .about__me__item-list {
  padding-top: 16px;
  li {
+  opacity: 0;
   text-align: left;
   margin-bottom: 12px;
   &:last-of-type {

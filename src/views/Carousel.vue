@@ -19,6 +19,7 @@
           <div class="carousel-indicator__number"><p>04</p></div>
         </div>
       </div>
+      <router-view></router-view>
     </div>
   </transition>
 </template>
@@ -38,9 +39,6 @@ export default {
     }
   },
   mixins: [animations],
-  mounted() {
-    this.testTimeline();
-  },
   methods: {
     enter(el, done) {
       const titleTween = gsap.fromTo(this.$refs.titleRef, 0.7, {opacity: 0, x: '100px'}, {opacity: 1, x: '0px', delay: 1});

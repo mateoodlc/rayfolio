@@ -23,11 +23,12 @@ const routes = [
           component: About
         },
         {
-          path: '/carousel',
+          path: 'carousel',
           component: Carousel,
           children: [
             {
-              path: 'project/',
+              name: 'Project',
+              path: 'project',
               component: Project,
             }
           ]
