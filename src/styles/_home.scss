@@ -10,6 +10,9 @@ body {
 .global-container {
  position: relative;
 }
+.global-container.max-bound {
+ min-height: 100vh;
+}
 
 .main-header {
  position: relative;

@@ -1,5 +1,5 @@
 <template>
-  <router-link to="/carousel/project" class="carousel__element">
+  <router-link :to="{name: 'Project', params: {name: getData.name, data: getData}}" class="carousel__element">
     <div class="carousel__element-title">
       <div class="masked-animation__wrapper">
         <span class="carousel__element-subtitle masked-animation__element" ref="subtitleRef">{{this.getData.title}}

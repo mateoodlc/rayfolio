@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Reel from '../views/Reel.vue'
 import Carousel from '../views/Carousel.vue'
-import Project from '../views/Project.vue'
+import Project from '../components/Project.vue'
 import About from '../views/About.vue'
 
 Vue.use(VueRouter)
@@ -28,8 +28,9 @@ const routes = [
           children: [
             {
               name: 'Project',
-              path: 'project',
+              path: 'project/:name',
               component: Project,
+              props: true
             }
           ]
         },

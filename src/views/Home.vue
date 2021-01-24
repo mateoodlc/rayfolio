@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="home max-bound">
-      <div class="global-container">
+    <div class="home">
+      <div class="global-container max-bound">
         <header class="main-header">
           <img class="logo" alt="Vue logo" src="../assets/logo.svg">
           <div class="masked-animation__wrapper">
