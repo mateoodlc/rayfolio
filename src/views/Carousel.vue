@@ -42,7 +42,7 @@ export default {
   methods: {
     enter(el, done) {
       const titleTween = gsap.fromTo(this.$refs.titleRef, 0.7, {opacity: 0, x: '100px'}, {opacity: 1, x: '0px', delay: 1});
-      const backButtonTween = gsap.fromTo(this.$refs.backRef, 0.7, {opacity: 0, translateY: '20px'}, {opacity: 1, translateY: '0px', delay: 1});
+      const backButtonTween = gsap.from(this.$refs.backRef, 0.7, {opacity: 0, translateY: '20px', delay: 1.8});
       gsap.timeline().add([
         titleTween,
         backButtonTween,

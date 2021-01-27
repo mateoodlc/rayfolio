@@ -16,6 +16,13 @@
  background-color: #000;
 }
 
+.max-bound.max-bound--project {
+ max-width: rem(1364);
+ &::before {
+  background-color: transparent;
+ }
+}
+
 .home.max-bound {
  background-color: #000;
 }
@@ -31,8 +38,14 @@
 }
 
 .outer-pad {
- padding: 0 144px;
+ padding: 0 rem(144);
  &.outer-pad--large {
-  padding: 0 272px;
+  padding: 0 rem(272);
+ }
+}
+
+@media (max-width: 1364px) {
+ .outer-pad {
+  padding: rem(100);
  }
 }

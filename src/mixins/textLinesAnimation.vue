@@ -8,6 +8,7 @@ export default {
     },
     createTextLine(content, elementWrapper) {
       const spanElement = document.createElement('span');
+      elementWrapper.innerHTML = '';
       spanElement.innerHTML = content;
       spanElement.style.display = 'inline-block';
       elementWrapper.appendChild(spanElement);

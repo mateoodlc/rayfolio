@@ -3,8 +3,10 @@
       <div>
         <div class="about">
           <div class="view-wave" ref="wave"></div>
-          <div class="about__main-container max-bound" ref="aboutContainer">
-            <button @click="hasHistory() ? $router.go(-1) : $router.push('/')" class="back-button" to="/">back</button>
+          <div class="about__main-container max-bound" ref="aboutContainerRef">
+            <router-link to="/" class="back-button">
+              <span ref="backRef">back</span>
+            </router-link>
             <div class="about__hero">
               <h2 ref="aboutTitle">Hello!</h2>
               <div class="about__image" ref="imageRef"></div>
@@ -69,8 +71,9 @@ export default {
     },
     methods: {
       leave(el, done) {
-        this.leaveTransitionY(this.$refs.wave, 'bottom', 0.4, done);
-        this.leaveTransitionY(this.$refs.imageRef, 'bottom', 0, done);
+        const {wave, aboutContainerRef} = this.$refs
+        this.leaveTransitionY(wave, 'bottom', 0.6, done);
+        gsap.to(aboutContainerRef, 0.5, {opacity: 0, delay: 0.5});
       },
       enter(el, done) {
         this.setEntryTimeline();
@@ -83,21 +86,18 @@ export default {
           gsap.fromTo(imageRef, 0.9, {scaleY: 0}, {scaleY: 1, delay: 0.8, ease: 'power4.inOut'}),
           gsap.fromTo(aboutContainer, 1, {y: '200px'}, {y: '0px', delay: 0.7}),
           gsap.fromTo(aboutContainer, 0.6, {opacity: 0}, {opacity: 1, delay: 0.7}),
-          gsap.fromTo(aboutTitle, 0.8, {x: '400px'}, {x: '0px', delay: 0.9}),
-          gsap.fromTo(aboutTitle, 0.6, {y: '50px'}, {y: '0px', delay: 0.7}),
+          gsap.from(aboutTitle, 0.8, {x: '400px', delay: 1.1}),
+          gsap.from(aboutTitle, 0.6, {y: '100px', opacity: 0, delay: 0.9}),
           this.animateTextLines(this.quote, blockquoteRef, 1),
           this.animateTextLines(this.cite, citeRef, 1.5),
         ]);
       },
       onScrollAnimate() {
-        console.log('executing');
         const {descriptionRef, contentTitleRef} = this.$refs
-        this.animateTextLines(this.description, descriptionRef, 1.5);
-        gsap.to(contentTitleRef, 0.6, {opacity: 1, y: '20px', delay: 2, ease: 'power2.out'});
-        gsap.to('li', 0.6, {opacity: 1, y: '20px', delay: 2, stagger: 0.1, ease: 'power2.out'});
+        this.animateTextLines(this.description, descriptionRef, 0.5);
+        gsap.to(contentTitleRef, 0.6, {opacity: 1, y: '20px', delay: 1, ease: 'power2.out'});
+        gsap.to('li', 0.6, {opacity: 1, y: '20px', delay: 1.5, stagger: 0.1, ease: 'power2.out'});
       },
-      triggerScrollCatcher() {
-      }
     }
 }
 </script>

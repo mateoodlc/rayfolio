@@ -19,7 +19,11 @@
  .back-button {
   position: absolute;
   top: rem(70);
+  left: 0;
   z-index: 2;
+  span {
+   top: 0;
+  }
  }
 }
 
@@ -27,9 +31,16 @@
  position: relative;
  display: flex;
  flex-wrap: wrap;
- align-items: center;
- padding: 494px 0;
+ flex-direction: column;
+ justify-content: center;
+ padding: 30% 0;
  z-index: 2;
+}
+
+.project__inner-wrapper {
+ position: relative;
+ z-index: 3;
+ opacity: 1;
 }
 
 .project__hero__title {
@@ -37,7 +48,7 @@
  text-align: left;
  z-index: 1;
  h1 {
-  font-size: 128px;
+  font-size: 6.5vw;
  }
  span {
   font-size: 88px;
@@ -67,12 +78,9 @@
 }
 
 .project__hero__description {
- position: absolute;
  width: 100%;
  max-width: 398px;
  text-align: left;
- margin-top: 40px;
- transform: translateY(100%);
  p {
   font-weight: normal;
   font-size: 24px;
@@ -85,26 +93,57 @@
  width: 81%;
  height: 0;
  padding-top: 50%;
- background-color: #eeeeee;
  margin-bottom: rem(160);
+ overflow: hidden;
+ span {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+ }
+ .image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #eeeeee;
+  transition: clip-path 0.6s ease-in-out;
+ }
  &:last-of-type {
   margin-bottom: 0;
  }
  &:nth-child(2) {
-  transform: translateX(40%);
+  transform: translateX(20vw);
  }
  &:nth-child(3) {
   transform: translateX(10%);
+ }
+ &:nth-child(even) {
+  .image {
+   clip-path: inset(0 0 0 100%);
+   &.scrolled {
+    clip-path: inset(0 0 0 0);
+   }
+  }
+ }
+ &:nth-child(odd) {
+  .image {
+   clip-path: inset(0 100% 0 0);
+   &.scrolled {
+    clip-path: inset(0 0 0 0);
+   }
+  }
  }
 }
 
 .project__inner-navigation {
  position: relative;
- text-align: right;
+ width: 100%;
  margin-top: 180px;
- float: right;
- transform: translateX(20%);
  h1 {
-  font-size: 88px;
+  text-align: right;
+  font-size: 4vw;
  }
 }

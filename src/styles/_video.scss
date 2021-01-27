@@ -1,0 +1,52 @@
+.video {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100vh;
+ overflow: hidden;
+ a {
+  z-index: 3;
+  span {
+   display: inline-block;
+   color: $black;
+   text-transform: uppercase;
+   font-size: rem(18);
+   font-weight: 700;
+   vertical-align: middle;
+   padding: rem(12) rem(16) rem(8) rem(16);
+   background-color: $yellow;
+   &::after {
+    content: "X";
+    font-size: rem(18);
+    font-weight: 700;
+    display: inline-block;
+    position: relative;
+    margin-left: rem(8);
+    transform: translateY(-1px);
+    color: $black;
+    vertical-align: middle;
+   }
+  }
+ }
+}
+
+.video video {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ object-fit: cover;
+ z-index: 2;
+}
+
+.video-wave {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ transform-origin: left;
+ background-color: #fff;
+}

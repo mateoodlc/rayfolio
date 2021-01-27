@@ -7,18 +7,31 @@ export default {
     }
   },
   methods: {
-    sectionCatcher: debounce(function(element, callBack) {
-      const elementTop = this.getOffset(element);
-      if (window.scrollY > elementTop - window.innerHeight / 1.2) {
-        if (!this.isScrolled) {
-          callBack();
-          this.isScrolled = true;
-        }
+    sectionCatcher: debounce(function(elements, callBack) {
+      if (elements.length > 1) {
+        elements.forEach(element => {
+          const elementTop = this.getOffset(element);
+          if (window.scrollY > elementTop - window.innerHeight / 1.2) {
+            if (!element.classList.contains('scrolled')) {
+              element.classList.add('scrolled');
+            }
+          } else if (window.scrollY == 0) {
+            element.classList.remove('scrolled');
+          }
+        });
+      } else {
+        const elementTop = this.getOffset(elements);
+          if (window.scrollY > elementTop - window.innerHeight / 1.2) {
+            if (!this.isScrolled) {
+              callBack();
+              this.isScrolled = true;
+            }
+          }
       }
     }, 50),
-    addScrollEvent(element, callBack) {
+    addScrollEvent(elements, callBack) {
       window.addEventListener("scroll", () => {
-        this.sectionCatcher(element, callBack);
+        this.sectionCatcher(elements, callBack);
       });
     },
     getOffset(element) {
