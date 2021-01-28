@@ -11,9 +11,9 @@
  top: 50%;
  left: 50%;
  width: 100vw;
- height: 100vh;
+ height: 100%;
  transform: translateX(-50%) translateY(-50%);
- background-color: #000;
+ background-color: $black;
 }
 
 .max-bound.max-bound--project {
@@ -38,7 +38,7 @@
 }
 
 .outer-pad {
- padding: 0 rem(144);
+ padding: 0 0;
  &.outer-pad--large {
   padding: 0 rem(272);
  }
@@ -46,6 +46,6 @@
 
 @media (max-width: 1364px) {
  .outer-pad {
-  padding: rem(100);
+  padding: 0 rem(100);
  }
 }

@@ -13,15 +13,19 @@
 
 .carousel__main-container {
  .back-button {
+  position: relative;
+  top: rem(50);
+  left: calc(15vw + #{rem(32)});
   span {
-   top: rem(150);
-   left: calc(5% + #{rem(32)});
+   top: 0;
+   left: 0;
   }
  }
 }
 
 .carousel-indicator {
- position: relative;
+ position: fixed;
+ top: 90%;
  left: 50%;
  transform: translateX(-50%);
  text-align: center;
@@ -42,10 +46,10 @@
  top: 50%;
  left: 0;
  width: 100%;
- height: rem(15);
+ height: rem(2);
  background-color: $black;
  transform-origin: left;
- transform: translateY(-50%) scale(0.2);
+ transform: translateY(-50%);
 }
 
 .carousel-indicator__line,
@@ -61,14 +65,14 @@
 .carousel__title {
  position: relative;
  margin-top: rem(16);
- left: 5%;
+ left: 15vw;
 }
 
 .carousel__outer-container {
  position: relative;
  overflow-x: scroll;
  width: 100%;
- padding: 2.25rem 15% 0 8%;
+ padding: 2.25rem 15% 0 25vw;
 }
 
 .carousel__container {
@@ -194,4 +198,89 @@ h3.carousel__element-number {
 .carousel__outer-container {
  -ms-overflow-style: none; /* IE and Edge */
  scrollbar-width: none; /* Firefox */
+}
+
+@media (max-width: 1200px) {
+}
+
+@media (max-width: 900px) {
+ .carousel__main-container .back-button {
+  top: rem(44);
+  left: rem(32);
+  span {
+   font-size: rem(16);
+  }
+  span::before {
+   width: rem(5);
+   height: rem(5);
+   left: rem(-16);
+  }
+ }
+ .carousel__outer-container {
+  padding: 0;
+  overflow: hidden;
+ }
+ .carousel__main-container {
+  height: 100vh;
+  overflow: hidden;
+ }
+ .carousel__container {
+  overflow-x: auto;
+  min-width: auto;
+  &::after {
+   min-width: 0;
+  }
+ }
+ .carousel__element {
+  position: relative;
+  width: 100vw;
+  min-width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin-right: 0;
+  &::before {
+   width: 0;
+  }
+ }
+
+ h3.carousel__element-number {
+  font-size: rem(40);
+  top: rem(48);
+ }
+
+ .carousel__element-image__wrapper {
+  right: unset;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translateX(-50%) translateY(-50%);
+ }
+ .carousel__element-title {
+  text-align: left;
+  width: 100%;
+  padding-left: rem(40);
+  .carousel__element-subtitle {
+   font-size: rem(24);
+   color: #fff;
+  }
+  .h1 {
+   font-size: rem(32);
+   color: #fff;
+  }
+ }
+ .carouel__element-title__line {
+  width: 100%;
+  background-color: #fff;
+ }
+ .carousel__title {
+  display: none;
+ }
+ .carousel-indicator {
+  position: fixed;
+  top: 90%;
+  width: 100%;
+ }
+}
+
+@media (max-width: 600px) {
 }

@@ -10,3 +10,11 @@
 @import "./project";
 @import "./carousel";
 @import "./video";
+
+@media (max-width: 900px) {
+ .back-button {
+  span {
+   font-size: rem(16);
+  }
+ }
+}

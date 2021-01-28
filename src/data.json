@@ -1,42 +1,51 @@
-[
-  {
-    "id": 1,
-    "name": "novo",
-    "title": "For the Raymis",
-    "subtitle": "oh, yeah",
-    "images": [
+{
+  "aboutContent": [
+    {
+      "hobbies": {
 
-    ],
-    "description": "Raymi es un bully de la verga\npero es de las personas más\ntiernas que he conocido ever"
-  },
-  {
-    "id": 2,
-    "name": "project2",
-    "title": "For the Raymis 2",
-    "subtitle": "oh, yeah",
-    "images": [
-
-    ],
-    "description": "lorem 2"
-  },
-  {
-    "id": 3,
-    "name": "project3",
-    "title": "For the Raymis 3",
-    "subtitle": "oh, yeah",
-    "images": [
-
-    ],
-    "description": "lorem 3"
-  },
-  {
-    "id": 4,
-    "name": "project4",
-    "title": "For the Raymis 4",
-    "subtitle": "oh, yeah",
-    "images": [
-
-    ],
-    "description": "lorem 4"
-  }
-]
+      }
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "novo",
+      "title": "For the Raymis",
+      "subtitle": "oh, yeah",
+      "images": [
+  
+      ],
+      "description": "Raymi es un bully de la verga\npero es de las personas más\ntiernas que he conocido ever"
+    },
+    {
+      "id": 2,
+      "name": "project2",
+      "title": "For the Raymis 2",
+      "subtitle": "oh, yeah",
+      "images": [
+  
+      ],
+      "description": "lorem 2"
+    },
+    {
+      "id": 3,
+      "name": "project3",
+      "title": "For the Raymis 3",
+      "subtitle": "oh, yeah",
+      "images": [
+  
+      ],
+      "description": "lorem 3"
+    },
+    {
+      "id": 4,
+      "name": "project4",
+      "title": "For the Raymis 4",
+      "subtitle": "oh, yeah",
+      "images": [
+  
+      ],
+      "description": "lorem 4"
+    }
+  ]
+}

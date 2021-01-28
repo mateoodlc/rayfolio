@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="home">
-      <div class="global-container max-bound">
+      <div class="global-container max-bound outer-pad">
         <header class="main-header">
           <img class="logo" alt="Vue logo" src="../assets/logo.svg">
           <div class="masked-animation__wrapper">
@@ -22,12 +22,13 @@
             <div class="home-navigation__element__inner-wrapper navigation__element-reel">
               <span class="home-navigation__element__line"></span>
               <span class="home-navigation__element__hover">Play</span>
-              <div class="masked-animation__wrapper">
+              <div class="masked-animation__wrapper" ref="reelWrapperRef">
                 <keep-alive>
                   <router-link 
                     to="/reel" 
                     class="home-navigation__element masked-animation__element" 
-                    ref="reelBtnRef">
+                    ref="reelBtnRef"
+                    @click.native="navigateReel">
                     Motion Reel
                   </router-link>
                 </keep-alive>
@@ -35,7 +36,7 @@
             </div>
             <div class="home-navigation__circle masked-animation__element" ref="wrapperRef">
               <svg height="100%" width="100%">
-                <circle class="path" ref="circleRef" cx="50%" cy="50%" r="49%" stroke="white" stroke-width="2" fill="black" />
+                <circle class="path" ref="circleRef" cx="50%" cy="50%" r="49%" stroke="white" stroke-width="2" fill="#141414" />
               </svg>
               <div class="home-navigation__circle__image-wrapper" ref="pictureRef">
                 <img src="../assets/download.png" alt="" srcset="">
@@ -44,11 +45,13 @@
             <div class="home-navigation__element__inner-wrapper navigation__element-design">
               <span class="home-navigation__element__line"></span>
               <span class="home-navigation__element__hover">View</span>
-              <div class="masked-animation__wrapper">
+              <div class="masked-animation__wrapper" ref="designWrapperRef">
                 <router-link 
                   to="/carousel" 
                   class="home-navigation__element masked-animation__element" 
-                  ref="designBtnRef">
+                  ref="designBtnRef"
+                  @click.native="navigateUI"
+                  >
                   UI Design
                 </router-link>
               </div>
@@ -91,6 +94,12 @@ export default {
         reelBtn: this.$refs.reelBtnRef.$el,
         about: this.$refs.aboutBtnRef.$el
       }
+    },
+    navigateUI() {
+      gsap.to(this.$refs.designWrapperRef, 0.4, {y: 50, yoyo: true, repeat: 1});
+    },
+    navigateReel() {
+      gsap.to(this.$refs.reelWrapperRef, 0.4, {y: 50, yoyo: true, repeat: 1});
     }
   }
 }

@@ -1,20 +1,22 @@
 <template>
     <transition @enter="enter" @leave="leave" appear>
-        <div class="project outer-pad" ref="projectRef" v-show="this.currentName === this.computedData.name">
+        <div class="project outer-pad" ref="projectRef">
             <div class="view-wave view-wave--project" ref="wave"></div>
             <div class="project__inner-wrapper max-bound max-bound--project" ref="projectContentWrapperRef">
                 <div class="project__hero">
-                    <div class="project__hero__title">
-                        <div class="h1 project__hero__title-marker" ref="heroTitleMarkerRef">
-                            <span class="bordered-heading" ref="number1">0</span>
-                            <span class="bordered-heading" ref="number2">1</span>
+                    <div class="project__hero__text-content">
+                        <div class="project__hero__title">
+                            <div class="h1 project__hero__title-marker" ref="heroTitleMarkerRef">
+                                <span class="bordered-heading" ref="number1">0</span>
+                                <span class="bordered-heading" ref="number2">1</span>
+                            </div>
+                            <h1 ref="projectTitleRef">Big Ass {{this.computedData ? this.computedData.name : ''}}</h1>
                         </div>
-                        <h1 ref="projectTitleRef">Big Ass {{this.computedData ? this.computedData.name : ''}}</h1>
+                        <div class="project__hero__description">
+                            <p ref="descriptionRef"></p>
+                        </div>
                     </div>
                     <div class="project__hero__image" ref="heroImageRef"></div>
-                    <div class="project__hero__description">
-                        <p ref="descriptionRef"></p>
-                    </div>
                 </div>      
                 <div class="project__content">
                     <div class="project__content__image">
@@ -69,11 +71,12 @@ export default {
             done();
         },
         leave(el, done) {
-            gsap.from(this.$refs.projectContentWrapperRef, 0.3, {opacity: 0});
+            console.log('leaving');
+            gsap.to(this.$refs.projectContentWrapperRef, 0.3, {opacity: 0});
             this.leaveTransitionY(this.$refs.wave, 'bottom', 0.2, done);
         },
         leaveAnimation() {
-            gsap.to(this.$refs.projectContentWrapperRef, 0.3, {opacity: 0});
+            gsap.to(this.$refs.projectContentWrapperRef, 0.1, {opacity: 0});
         },
         entryAnimation() {
             gsap.to(this.$refs.projectContentWrapperRef, 0, {opacity: 1});
@@ -99,7 +102,7 @@ export default {
     },
     computed: {
         computedData() {
-            return data.filter((element) => {
+            return data.projects.filter((element) => {
                 return element.name === this.currentName;
             })[0];
         },
@@ -122,11 +125,12 @@ export default {
     },
     watch: {
         currentName() {
+            console.log(this.$route.params.name);
             this.leaveAnimation();
             setTimeout(() => {
                 this.entryAnimation();
                 window.scrollTo({top: 0});
-            }, 1000)
+            }, 250)
         }
     },
     mounted() {

@@ -8,13 +8,13 @@ export default {
     },
     createTextLine(content, elementWrapper) {
       const spanElement = document.createElement('span');
-      elementWrapper.innerHTML = '';
       spanElement.innerHTML = content;
       spanElement.style.display = 'inline-block';
       elementWrapper.appendChild(spanElement);
       return spanElement;
     },
     animateTextLines(textElement, elementWrapper, entryDelay) {
+      elementWrapper.innerHTML = '';
       const textLines = this.breakText(textElement);
       const textLinesElementsArray = [];
       textLines.forEach((element) => {
