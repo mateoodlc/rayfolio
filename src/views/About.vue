@@ -56,6 +56,7 @@ import hasHistoryVue from '../mixins/hasHistory.vue';
 import textLinesAnimationVue from '../mixins/textLinesAnimation.vue';
 import sectionCatcherVue from '../mixins/sectionCatcher.vue';
 import textCharAnimationsVue from '../mixins/textCharAnimations.vue';
+import data from "../data.json";
 export default {
     data() {
       return {
@@ -68,6 +69,7 @@ export default {
     },
     mixins: [animations, hasHistoryVue, textLinesAnimationVue, textCharAnimationsVue, sectionCatcherVue],
     mounted() {
+      console.log(data);
       this.addScrollEvent(this.$refs.aboutContentRef, this.onScrollAnimate);
       window.addEventListener('resize', () => {
         this.windowWidth = window.innerWidth;

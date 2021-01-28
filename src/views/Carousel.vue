@@ -84,18 +84,22 @@ export default {
       const factor = this.getScrollX();
       const minScroll = 0;
       const maxScroll = this.getElementWidth() - window.innerWidth;
-      const minScale = 1 / data.length;
+      const minScale = 1 / data.projects.length;
       const maxScale = 1;
       const map = this.map(factor, minScroll, maxScroll, minScale, maxScale, true)
-      console.log(this.getElementWidth());
       this.$refs.lineRef.style.transform = `translateY(-50%) scaleX(${map}`;
-    }, 0),
+    }, 10),
   },
   mounted() {
     this.updateLineWidth();
     document.addEventListener('scroll', () => {
-      this.updateLineWidth();
+      if (this.routeMatch) this.updateLineWidth();
     })
   },
+  computed: {
+    routeMatch() {
+      return this.$route.path === "/carousel";
+    }
+  }
 }
 </script>
