@@ -57,10 +57,13 @@ body {
 
 .home-navigation__element__inner-wrapper {
  position: relative;
+}
+
+@media (min-width: 900px) {
  .masked-animation__element {
   transition: color 0.2s;
  }
- &:hover {
+ .home-navigation__element__inner-wrapper:hover {
   .masked-animation__element {
    color: $yellow;
   }
@@ -221,7 +224,7 @@ body {
 @media (max-width: 900px) {
  h1.masked-animation__element {
   font-size: rem(40);
-  margin-bottom: rem(10);
+  margin-bottom: rem(0);
  }
  .home-navigation {
   justify-content: center;
@@ -230,6 +233,7 @@ body {
  }
  .home__description {
   font-size: rem(16);
+  margin-top: rem(10);
  }
  .home-navigation__circle {
   width: 70%;

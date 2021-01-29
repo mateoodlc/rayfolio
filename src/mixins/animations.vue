@@ -14,7 +14,7 @@
       },
       enterTransitionY (element, origin, delay, onCompleteParam) {
         element.style.transformOrigin = origin;
-        const tween = gsap.from(element, 1.5, {scaleY: 0, delay: delay, ease: 'power3.inOut', onComplete: onCompleteParam});
+        const tween = gsap.from(element, 1.5, {scaleY: 0, delay: delay, ease: 'expo.inOut', onComplete: onCompleteParam});
         return tween;
       },
       leaveTransitionY (element, origin, delay, onCompleteParam) {

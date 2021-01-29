@@ -8,6 +8,10 @@
  left: 0;
  width: 100%;
  padding-bottom: rem(200);
+ overflow: hidden;
+ .view-wave {
+  transform-origin: bottom;
+ }
 }
 
 .about__main-container {

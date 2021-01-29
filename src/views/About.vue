@@ -104,25 +104,26 @@ export default {
         gsap.to(aboutContainerRef, 0.2, {opacity: 0, delay: 0});
       },
       enter(el, done) {
-        const {wave, descriptionRef__mobile, aboutContainerRef, backRef} = this.$refs;
-        this.setEntryTimeline();
-        this.enterTransitionY(wave, 'bottom', 0, done);
-        this.animateTextLines(this.description, descriptionRef__mobile, 1.5);
-        gsap.from(aboutContainerRef, 0.1, {opacity: 0, delay: 1})
-        gsap.from(backRef, 0.5, {y: '100px', opacity: 0, delay: 1.5})
-        this.mainTimeline.play();
+        const {wave, aboutContainerRef, backRef} = this.$refs;
+        this.mainTimeline.add(
+          [
+            ...this.setEntryTimeline(),
+            this.enterTransitionY(wave, 'bottom', 0, done),
+            gsap.from(aboutContainerRef, 0.1, {opacity: 0, delay: 1}),
+            gsap.from(backRef, 0.5, {y: '100px', opacity: 0, delay: 1.5}),
+          ]  
+        )
+        this.mainTimeline.play()
       },
       setEntryTimeline() {
         const {imageRef, aboutTitle, blockquoteRef, citeRef, descriptionRef__mobile} = this.$refs;
-        this.mainTimeline.add([
-          !this.isMobile ?
-          (gsap.fromTo(imageRef, 0.9, {scaleY: 0}, {scaleY: 1, delay: 0.8, ease: 'power4.inOut'}),
-          gsap.from(aboutTitle, 0.8, {y: '200px', opacity: 0, delay: 1})) : this.breakAllTitles(aboutTitle, 0.9),
-          gsap.from(aboutTitle, 0.8, {x: '400px', delay: 1.2, ease: 'power2.out'}),
+          return [
+          gsap.fromTo(imageRef, 0.9, {scaleY: 0}, {scaleY: 1, delay: 0.8, ease: 'power4.inOut'}),
+          this.breakAllTitles(aboutTitle, 0.8),
           this.isMobile ? this.animateTextLines(this.description, descriptionRef__mobile, 1) : '',
           this.animateTextLines(this.quote, blockquoteRef, 1),
           this.animateTextLines(this.cite, citeRef, 1.5),
-        ]);
+        ];
       },
       onScrollAnimate() {
         const {descriptionRef__desktop} = this.$refs

@@ -34,12 +34,12 @@ export default {
       }
       this.animateLetters(delay);
     },
-    animateLetters(delay) {
-      gsap.from('.title-letter', 0.5, {y: '100px', rotate: '10deg', scale: 0.6, stagger: { // wrap advanced options in an object
+    animateLetters() {
+      gsap.from('.title-letter', 0.5, {y: '100%', scaleY: 0.6, delay: 0.7, stagger: { // wrap advanced options in an object
         each: 0.1,
-        ease: 'power1.inOut'
+        ease: 'sine.out',
+        amount: 0.4
       },
-      delay: delay
     });
     }
   }

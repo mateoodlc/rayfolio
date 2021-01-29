@@ -21,7 +21,7 @@ const frameTwo = (elements) => {
   const { wrapper, heading, line1, line2, designBtn, reelBtn, about } = elements;
   return gsap.timeline({delay: 3.5}).add([
     gsap.fromTo(wrapper, 1.5, { y: -150 }, { y: 0, ease: animationEase, delay: 0.2 }),
-    gsap.fromTo(heading, 1.5, { y: "100%" }, { y: 0, ease: animationEase, delay: 0.4 }),
+    gsap.from(heading, 1.5, { y: "100%", ease: animationEase, delay: 0.4 }),
     gsap.fromTo(line1, 1.5, { y: "100%" }, { y: 0, ease: animationEase, delay: 0.6 }),
     gsap.fromTo(line2, 1.5, { y: "100%" }, { y: 0, ease: animationEase, delay: 0.7 }),
     gsap.fromTo(reelBtn, 1.5, { y: "100%" }, { y: 0, ease: animationEase, delay: 0.8 }),
