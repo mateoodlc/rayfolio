@@ -71,7 +71,6 @@ export default {
             done();
         },
         leave(el, done) {
-            console.log('leaving');
             gsap.to(this.$refs.projectContentWrapperRef, 0.3, {opacity: 0});
             this.leaveTransitionY(this.$refs.wave, 'bottom', 0.2, done);
         },
@@ -88,9 +87,7 @@ export default {
             this.animateTextLines(this.computedData.description, descriptionRef, 1.6);
         },
         goToNext() {
-            console.log(this.$router.history.current.params.name);
             this.$router.push(this.returnNextPage).catch(err => {
-                    // Ignore the vuex err regarding  navigating to the page they are already on.
                 if (err.name !== 'NavigationDuplicated' && !err.message.includes('Avoided redundant navigation to current location')) {
                     // But print any other errors to the console
                 }
@@ -98,7 +95,7 @@ export default {
         },
         scrollToTop() {
             window.scrollTo(0, 0);
-        }
+        },
     },
     computed: {
         computedData() {
@@ -112,12 +109,12 @@ export default {
         returnNextPage() {
             const currentId = this.computedData.id;
             const projectsFinished = currentId + 1 > data.length;
+            console.log(currentId)
             if (projectsFinished) {
-                console.log('shouldRespond')
-                return data[0].name;
+                return data.projects[0].name;
             }
             const nextPageId = currentId + 1;
-            const nextPage = data.filter((element) => {
+            const nextPage = data.projects.filter((element) => {
                 return element.id === nextPageId;
             })[0];
             return nextPage.name;
@@ -125,7 +122,6 @@ export default {
     },
     watch: {
         currentName() {
-            console.log(this.$route.params.name);
             this.leaveAnimation();
             setTimeout(() => {
                 this.entryAnimation();
@@ -135,10 +131,9 @@ export default {
     },
     mounted() {
         this.imageElements = document.querySelectorAll('.image');
-        this.addScrollEvent(this.imageElements, (element) => {
-            gsap.from(element, 10, {webkitClipPath: 'inset(50% 0% 0%)',
-            clipPath: 'inset(50% 0% 0%)'})
-        });
+        window.addEventListener("scroll", () => {
+            this.sectionCatcher(this.imageElements);
+        })
     }
 }
 </script>

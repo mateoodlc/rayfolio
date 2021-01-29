@@ -1,8 +1,22 @@
 {
   "aboutContent": [
     {
-      "hobbies": {
-
+      "hobbies": [
+        "Painting",
+        "Dancing",
+        "Voleyball",
+        "Videogames",
+        "Trekking"
+      ]
+    },
+    {
+      "experience": {
+        "Pragma" : "Motion & UI Designer | Since 2019",
+        "Fury Records" : "Motion Designer | 2019",
+        "Fundación Delirio" : "Motion Designer | 2018",
+        "Quan Esstudios" : "Intern | 2018",
+        "Uniautónoma del Cauca" : "Intern | 2018",
+        "Icesi University" : "Designer Jr | 2015-17"
       }
     }
   ],

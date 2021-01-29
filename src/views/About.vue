@@ -19,26 +19,43 @@
               </div>
             </div>
             <div class="about__content outer-pad outer-pad--large" ref="aboutContentRef">
-              <div class="content__description" v-show="!isMobile">
+              <div class="content__description scrollable" v-show="!isMobile">
                 <p ref="descriptionRef__desktop" ></p>
               </div>
               <div class="about__me">
-                <div class="silc-grid">
-                  <div class="silc-grid__col silc-grid__col--6-1000 about__me-title"><h3 ref="contentTitleRef">Hobbies</h3></div>
-                  <div class="silc-grid__col silc-grid__col--6-1000">
-                    <div class="silc-grid">
-                      <div class="silc-grid__col silc-grid__col--6-1000">
-                        <ul class="about__me__item-list">
-                          <li>Painting</li>
-                        </ul>
-                      </div>
-                      <div class="silc-grid__col silc-grid__col--6-1000">
-                        <ul class="about__me__item-list about__me__item-list--strong">
-                          <li>Painting</li>
-                        </ul>
-                      </div>
-                    </div>
+                <div class="about__me__items scrollable scrollable">
+                  <div class="about__me-title"><h3 ref="contentTitleRef">Hobbies</h3></div>
+                  <div class="about__me-items">
+                    <ul class="about__me__item-list">
+                      <li v-for="(aboutItem, key, index) in hobbies" :key="key" :index="index">{{aboutItem}}</li>
+                    </ul>
                   </div>
+                </div>
+                <div class="about__me__items scrollable" ref="experienceListRef">
+                  <div class="about__me-title"><h3 ref="experienceTitleRef">Experience</h3></div>
+                  <div class="about__me__items-wrapper">
+                    <ul class="about__me__item-list about__me__item-list__experience">
+                      <li v-for="(experienceItem, key, index) in experienceData" :key="key" :index="index">
+                        <p class="about__me-experience__company">{{key}}</p>
+                        <p class="about__me-experience__role">{{experienceItem}}</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="about__me__items scrollable">
+                  <div class="about__me-title"><h3>Find me on</h3></div>
+                  <ul class="about__me__item-list">
+                    <li class="social"><strong>Behance</strong></li>
+                    <li class="social"><strong>Dribbble</strong></li>
+                    <li class="social"><strong>Instagram</strong></li>
+                  </ul>
+                </div>
+                <div class="about__me__items scrollable">
+                  <div class="about__me-title"><h3>Contact</h3></div>
+                  <ul class="about__me__item-list">
+                    <li><strong>Email: </strong>raymi.fc@gmail.com</li>
+                    <li><strong>Cell: </strong>(+57) 314 777 5799</li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -65,12 +82,17 @@ export default {
         cite: "&mdash; Christopher Nolan,\nInception",
         description: "My name is <strong>Raymi Farinango</strong>. I'm a UI &amp;\nMotion Designer based in Colombia in love\nwith motion graphics, beautiful interfaces\nand animated interactions.",
         windowWidth: window.innerWidth,
+        hobbies: data.aboutContent[0].hobbies,
+        experienceData: data.aboutContent[1].experience,
+        scrollableElements: undefined
       }
     },
     mixins: [animations, hasHistoryVue, textLinesAnimationVue, textCharAnimationsVue, sectionCatcherVue],
     mounted() {
-      console.log(data);
-      this.addScrollEvent(this.$refs.aboutContentRef, this.onScrollAnimate);
+      this.scrollableElements = Array.from(document.querySelectorAll('.scrollable')).map((element) => {
+        return {element, state: false}
+      });
+      this.addScrollEvent(this.scrollableElements);
       window.addEventListener('resize', () => {
         this.windowWidth = window.innerWidth;
       })
@@ -78,34 +100,38 @@ export default {
     methods: {
       leave(el, done) {
         const {wave, aboutContainerRef} = this.$refs
-        this.leaveTransitionY(wave, 'bottom', 0.6, done);
-        gsap.to(aboutContainerRef, 0.5, {opacity: 0, delay: 0.5});
+        this.leaveTransitionY(wave, 'bottom', 0.1, done);
+        gsap.to(aboutContainerRef, 0.2, {opacity: 0, delay: 0});
       },
       enter(el, done) {
-        const {wave, descriptionRef__mobile, aboutContainerRef} = this.$refs;
-        console.log(this.$refs);
+        const {wave, descriptionRef__mobile, aboutContainerRef, backRef} = this.$refs;
         this.setEntryTimeline();
         this.enterTransitionY(wave, 'bottom', 0, done);
         this.animateTextLines(this.description, descriptionRef__mobile, 1.5);
         gsap.from(aboutContainerRef, 0.1, {opacity: 0, delay: 1})
+        gsap.from(backRef, 0.5, {y: '100px', opacity: 0, delay: 1.5})
         this.mainTimeline.play();
       },
       setEntryTimeline() {
-        const {imageRef, aboutTitle, blockquoteRef, citeRef} = this.$refs;
+        const {imageRef, aboutTitle, blockquoteRef, citeRef, descriptionRef__mobile} = this.$refs;
         this.mainTimeline.add([
           !this.isMobile ?
           (gsap.fromTo(imageRef, 0.9, {scaleY: 0}, {scaleY: 1, delay: 0.8, ease: 'power4.inOut'}),
-          gsap.from(aboutTitle, 0.8, {x: '400px', delay: 1.1}),
-          gsap.from(aboutTitle, 0.6, {y: '100px', opacity: 0, delay: 0.9})) : this.breakAllTitles(aboutTitle, 0.9),
+          gsap.from(aboutTitle, 0.8, {y: '200px', opacity: 0, delay: 1})) : this.breakAllTitles(aboutTitle, 0.9),
+          gsap.from(aboutTitle, 0.8, {x: '400px', delay: 1.2, ease: 'power2.out'}),
+          this.isMobile ? this.animateTextLines(this.description, descriptionRef__mobile, 1) : '',
           this.animateTextLines(this.quote, blockquoteRef, 1),
           this.animateTextLines(this.cite, citeRef, 1.5),
         ]);
       },
       onScrollAnimate() {
-        const {descriptionRef__desktop, contentTitleRef} = this.$refs
+        const {descriptionRef__desktop} = this.$refs
         this.animateTextLines(this.description, descriptionRef__desktop, 0.5);
-        gsap.to(contentTitleRef, 0.6, {opacity: 1, y: '0', delay: 1, ease: 'power2.out'});
-        gsap.to('li', 0.6, {opacity: 1, y: '0px', delay: 1.5, stagger: 0.1, ease: 'power2.out'});
+      },
+      addScrollEvent(elements) {
+        window.addEventListener("scroll", () => {
+            this.staggerFades(elements, this.onScrollAnimate);
+        });
       },
     },
     computed: {

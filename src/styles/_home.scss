@@ -167,6 +167,7 @@ body {
  padding-top: 28%;
  border-radius: 50%;
  z-index: 1;
+ transform-origin: center center;
 }
 
 .home-navigation__circle__image-wrapper {
@@ -196,11 +197,11 @@ body {
  box-sizing: border-box;
  display: block;
  position: absolute;
- top: -16px;
+ top: 50%;
  left: 50%;
  width: calc(100% + 32px);
  height: calc(100% + 32px);
- transform: translateX(-50%);
+ transform: translateX(-50%) translateY(-50%);
  .path {
   width: 100%;
   height: 100%;

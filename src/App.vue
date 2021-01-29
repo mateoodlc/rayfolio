@@ -1,7 +1,7 @@
 <template>
   <div id="app"> 
-    <div class="pointer-circle" ref="circleRef"></div>
-    <div class="pointer" ref="pointer"></div>
+    <div class="pointer-circle" ref="circleRef" :class="{'dark': this.$route.path !== '/' && this.$route.path !== 'reel'}"></div>
+    <div class="pointer" :class="{'dark': this.$route.path !== '/' && this.$route.path !== 'reel'}" ref="pointer"></div>
     <keep-alive>
       <router-view/>
     </keep-alive>

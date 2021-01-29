@@ -35,7 +35,7 @@
               </div>
             </div>
             <div class="home-navigation__circle masked-animation__element" ref="wrapperRef">
-              <svg height="100%" width="100%">
+              <svg height="100%" width="100%" ref="circleSvgRef">
                 <circle class="path" ref="circleRef" cx="50%" cy="50%" r="49%" stroke="white" stroke-width="2" fill="#141414" />
               </svg>
               <div class="home-navigation__circle__image-wrapper" ref="pictureRef">
@@ -92,7 +92,8 @@ export default {
         line2: this.$refs.descriptionRefLineTwo,
         designBtn: this.$refs.designBtnRef.$el,
         reelBtn: this.$refs.reelBtnRef.$el,
-        about: this.$refs.aboutBtnRef.$el
+        about: this.$refs.aboutBtnRef.$el,
+        circleSvgRef: this.$refs.circleSvgRef,
       }
     },
     navigateUI() {

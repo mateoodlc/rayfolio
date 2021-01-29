@@ -1,19 +1,19 @@
 import { gsap } from 'gsap';
 
-const animationEase = 'power4.inOut';
+const animationEase = 'expo.inOut';
 let blurElement = { a: 30 };
 
 const frameOne = (elements) => {
-  const { circle, picture } = elements;
+  const { circle, picture, circleSvgRef } = elements;
   function applyBlur() {
     gsap.set(picture, {webkitFilter:"blur(" + blurElement.a + "px)",filter:"blur(" + blurElement.a + "px)"});  
   }
   return gsap.timeline().add([
-    gsap.to(circle, 2, { strokeDashoffset: 0, ease: animationEase }),
-    gsap.fromTo(circle, 2, { scale: 0.3 }, { scale: 1, ease: animationEase, delay: 1.5}),
-    gsap.fromTo(picture, 1, { opacity: 0 }, { opacity: 1, ease: 'linear', delay: 1.5 }),
-    gsap.to(blurElement, 1, {a: 0, onUpdate:applyBlur, delay: 1.6}),
-    gsap.fromTo(picture, 2, { scale: 0.26, x: 3, y: 3 }, { scale: 1, x: 0, y: 0, ease: animationEase, delay: 1.6 }),
+    gsap.to(circle, 3, { strokeDashoffset: 0, ease: animationEase }),
+    gsap.fromTo(circleSvgRef, 2, { scale: 0.3 }, { scale: 1, ease: animationEase, delay: 1.75}),
+    gsap.fromTo(picture, 1, { opacity: 0 }, { opacity: 1, ease: 'linear', delay: 1.7 }),
+    gsap.to(blurElement, 1.5, {a: 0, onUpdate:applyBlur, delay: 1.8}),
+    gsap.from(picture, 2, { scale: 0.26, ease: animationEase, delay: 1.8 }),
   ]);
 }
 

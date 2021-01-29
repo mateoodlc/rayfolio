@@ -1,9 +1,12 @@
 <script>
 import debounce from 'lodash.debounce';
+import gsap from 'gsap';
+import textLinesAnimationVue from './textLinesAnimation.vue';
 export default {
   data() {
     return {
       isScrolled: false,
+      fadesStaggered: false
     }
   },
   methods: {
@@ -29,15 +32,34 @@ export default {
           }
       }
     }, 50),
-    addScrollEvent(elements, callBack) {
-      window.addEventListener("scroll", () => {
-        this.sectionCatcher(elements, callBack);
-      });
-    },
+    staggerFades: debounce(function(elements, callBack) {
+      elements.forEach((item) => {
+        const {element, state} = item;
+        const elementTop = this.getOffset(element);
+        if (window.scrollY > elementTop - window.innerHeight / 1.2) {
+          if (!state) {
+            this.animateLists(item, callBack);
+          }
+        }
+      })
+    }),  
+    animateLists(elementObj, callBack) {
+      const {element} = elementObj
+      const isDescription = element.classList.contains('content__description');
+        const listElement = element.querySelectorAll('li');
+        const titleElement = element.querySelector('h3');
+        if (isDescription) {
+          callBack();
+          elementObj.state = true;
+        } else {
+          gsap.to([titleElement, listElement], 0.4, {y: '0', opacity: 1, scaleY: '1', delay: 0.2, ease: 'power2.inOut', stagger: 0.1});
+        }
+      },
     getOffset(element) {
       const rect = element.getBoundingClientRect();
       return rect.top + window.scrollY;
     }
-  }
+  },
+  mixins: [textLinesAnimationVue]
 }
 </script>
