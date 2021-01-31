@@ -35,7 +35,7 @@ export default {
       this.animateLetters(delay);
     },
     animateLetters() {
-      gsap.from('.title-letter', 0.5, {y: '100%', scaleY: 0.6, delay: 0.7, stagger: { // wrap advanced options in an object
+      gsap.from('.title-letter', 0.5, {y: '101%', scaleY: 0.5, delay: 0.7, stagger: { // wrap advanced options in an object
         each: 0.1,
         ease: 'sine.out',
         amount: 0.4

@@ -1,8 +1,8 @@
 <template>
     <transition @enter="enter" @leave="leave" appear>
       <div>
+          <div class="view-wave" style="position: fixed" ref="wave"></div>
         <div class="about">
-          <div class="view-wave" ref="wave"></div>
           <div class="about__main-container max-bound outer-pad" ref="aboutContainerRef">
             <router-link to="/" class="back-button">
               <span ref="backRef">back</span>
@@ -12,7 +12,9 @@
               <div class="content__description" v-show="isMobile">
                 <p ref="descriptionRef__mobile"></p>
               </div>
-              <div class="about__image" ref="imageRef"></div>
+              <div class="about__image">
+                <img src="../assets/about.jpg" ref="imageRef" alt="" srcset="">
+              </div>
               <div class="about__inspirational-phrase">
                 <blockquote ref="blockquoteRef"></blockquote>
                 <cite ref="citeRef"></cite>
@@ -74,6 +76,7 @@ import textLinesAnimationVue from '../mixins/textLinesAnimation.vue';
 import sectionCatcherVue from '../mixins/sectionCatcher.vue';
 import textCharAnimationsVue from '../mixins/textCharAnimations.vue';
 import data from "../data.json";
+import isMobileVue from '../mixins/isMobile.vue';
 export default {
     data() {
       return {
@@ -87,8 +90,9 @@ export default {
         scrollableElements: undefined
       }
     },
-    mixins: [animations, hasHistoryVue, textLinesAnimationVue, textCharAnimationsVue, sectionCatcherVue],
+    mixins: [animations, hasHistoryVue, textLinesAnimationVue, textCharAnimationsVue, sectionCatcherVue, isMobileVue],
     mounted() {
+      console.log(this.isMobile);
       this.scrollableElements = Array.from(document.querySelectorAll('.scrollable')).map((element) => {
         return {element, state: false}
       });
@@ -104,22 +108,22 @@ export default {
         gsap.to(aboutContainerRef, 0.2, {opacity: 0, delay: 0});
       },
       enter(el, done) {
-        const {wave, aboutContainerRef, backRef} = this.$refs;
+        const {wave} = this.$refs;
         this.mainTimeline.add(
           [
-            ...this.setEntryTimeline(),
             this.enterTransitionY(wave, 'bottom', 0, done),
-            gsap.from(aboutContainerRef, 0.1, {opacity: 0, delay: 1}),
-            gsap.from(backRef, 0.5, {y: '100px', opacity: 0, delay: 1.5}),
+            ...this.setEntryTimeline(),
           ]  
         )
         this.mainTimeline.play()
       },
       setEntryTimeline() {
-        const {imageRef, aboutTitle, blockquoteRef, citeRef, descriptionRef__mobile} = this.$refs;
+        const {imageRef, aboutTitle, blockquoteRef, citeRef, descriptionRef__mobile, aboutContainerRef, backRef} = this.$refs;
           return [
-          gsap.fromTo(imageRef, 0.9, {scaleY: 0}, {scaleY: 1, delay: 0.8, ease: 'power4.inOut'}),
-          this.breakAllTitles(aboutTitle, 0.8),
+          gsap.from(aboutContainerRef, 0, {opacity: 0, delay: 0.6}),
+          gsap.from(backRef, 0.5, {y: '100px', opacity: 0, delay: 1.5}),
+          gsap.from(imageRef, 0.9, {y: '100%', delay: 0.8, ease: 'power4.inOut'}),
+          this.breakAllTitles(aboutTitle, 1),
           this.isMobile ? this.animateTextLines(this.description, descriptionRef__mobile, 1) : '',
           this.animateTextLines(this.quote, blockquoteRef, 1),
           this.animateTextLines(this.cite, citeRef, 1.5),
@@ -135,10 +139,5 @@ export default {
         });
       },
     },
-    computed: {
-      isMobile() {
-        return this.windowWidth < 900;
-      }
-    }
 }
 </script>

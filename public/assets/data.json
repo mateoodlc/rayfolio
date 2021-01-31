@@ -23,8 +23,8 @@
   "projects": [
     {
       "id": 1,
-      "name": "esperanza",
-      "title": "E. Gomez",
+      "name": "novo",
+      "title": "For the Raymis",
       "subtitle": "oh, yeah",
       "mainImage" : "proj1-img-01.png",
       "images": [
@@ -36,8 +36,8 @@
     },
     {
       "id": 2,
-      "name": "alexis",
-      "title": "A. Texas",
+      "name": "project2",
+      "title": "For the Raymis 2",
       "subtitle": "oh, yeah",
       "mainImage" : "proj2-img-01.png",
       "images": [
@@ -49,16 +49,26 @@
     },
     {
       "id": 3,
-      "name": "lexi",
-      "title": "L. Anne",
+      "name": "project3",
+      "title": "For the Raymis 3",
       "subtitle": "oh, yeah",
-      "mainImage" : "proj3-img-01.png",
+      "mainImage" : "proj1-img-01.png",
       "images": [
         "proj3-img-02.png",
         "proj3-img-03.png",
         "proj3-img-04.png"
       ],
       "description": "lorem 3"
+    },
+    {
+      "id": 4,
+      "name": "project4",
+      "title": "For the Raymis 4",
+      "subtitle": "oh, yeah",
+      "mainImage" : "",
+      "images": [
+      ],
+      "description": "lorem 4"
     }
   ]
 }

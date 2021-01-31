@@ -4,7 +4,7 @@
  margin: 0 auto;
 }
 
-.max-bound::before {
+.global-container::before {
  content: "";
  display: block;
  position: absolute;
@@ -34,11 +34,14 @@
 .project.max-bound::before {
  width: 100%;
  height: 100%;
- background-color: #fff;
+ background-color: $white;
 }
 
 .outer-pad {
- padding: 0 0;
+    padding: 0 rem(100);
+}
+
+.outer-pad {
  &.outer-pad--large {
   padding: 0 rem(272);
   padding-right: 0;

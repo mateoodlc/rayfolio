@@ -18,3 +18,29 @@
   }
  }
 }
+
+.back-button {
+    position: relative;
+    span {
+        display: block;
+    }
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: -10px;
+        width: 100%;
+        height: rem(1);
+        background-color: $white;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: transform .3s ease-in, opacity .3s ease-in;
+    }
+    &:hover {
+        &::before {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}

@@ -58,13 +58,15 @@ export default {
       this.rawY = e.clientY;
       this.halfW = window.innerWidth / 2;
       this.halfH = window.innerHeight / 2 - window.scrollY;
-      gsap.to(this.$refs.circleRef, 0.5, {
+      gsap.to(this.$refs.circleRef, 1, {
         x: this.rawX - this.halfW,
-        y: this.rawY - this.halfH
+        y: this.rawY - this.halfH,
+        ease: 'power4.out'
       });
       gsap.to(this.$refs.pointer, 0, {
         x: this.rawX - this.halfW,
-        y: this.rawY - this.halfH
+        y: this.rawY - this.halfH,
+        ease: 'power4.out'
       });
     },
   }

@@ -1,22 +1,22 @@
 <template>
   <transition v-on:leave="leave" v-on:enter="enter" appear>
-    <div >
-      <div class="view-wave" ref="wave"></div>
-      <div class="carousel__main-container" ref="carouselRef">
+    <div>
+      <div class="carousel view-wave" ref="wave"></div>
+      <div class="carousel__main-container" ref="carouselRef" :class="{'no-scrollable': !this.routeMatch}">
         <h1 class="h1--large bordered-heading carousel__title" ref="titleRef">Ui Design</h1>
         <router-link to="/" class="back-button">
         <span ref="backRef">back</span></router-link>
         <div class="carousel__outer-container">
-          <div class="carousel__container" ref="carouselContainer">
+          <div class="carousel__container" ref="carouselContainer" @scroll.passive="updateLineWidth">
             <project-card ref="carouselElement" v-for="(project, index, key) of projectData" :projectData="projectData[index]" :key="key" :index="index"></project-card>
           </div>
         </div>
-        <div class="carousel-indicator">
+        <div class="carousel-indicator" ref="carouselIndicator">
           <div class="carousel-indicator__number"><p>01</p></div>
           <div class="carousel-indicator__line">
             <span ref="lineRef"></span>
           </div>
-          <div class="carousel-indicator__number"><p>04</p></div>
+          <div class="carousel-indicator__number"><p>0{{projectData.length}}</p></div>
         </div>
       </div>
       <router-view></router-view>
@@ -30,6 +30,7 @@ import projectCard from "../components/projectCard";
   import data from "../data.json";
   import debounce from 'lodash.debounce';
 import gsap from 'gsap';
+import isMobileVue from '../mixins/isMobile.vue';
 export default {
   name: "carousel",
   components: {projectCard},
@@ -40,15 +41,17 @@ export default {
       scrollX: window.pageXOffset || document.documentElement.scrollLeft
     }
   },
-  mixins: [animations],
+  mixins: [animations, isMobileVue],
   methods: {
     enter(el, done) {
-      const titleTween = gsap.fromTo(this.$refs.titleRef, 0.7, {opacity: 0, x: '100px'}, {opacity: 1, x: '0px', delay: 1});
-      const backButtonTween = gsap.from(this.$refs.backRef, 0.7, {opacity: 0, translateY: '20px', delay: 1.8});
+      const {titleRef, backRef, carouselIndicator} = this.$refs;
+      const titleTween = gsap.fromTo(titleRef, 0.7, {opacity: 0, x: '100px'}, {opacity: 1, x: '0px', delay: 1});
+      const fadeInY = (element) => gsap.from(element, 0.7, {opacity: 0, y: '20px', delay: 1.8});
       gsap.timeline().add([
         titleTween,
-        backButtonTween,
-        this.enterTransitionX(this.$refs.wave, 'right', 0, done)
+        fadeInY(backRef),
+        fadeInY(carouselIndicator),
+        this.isMobile ? '' : this.enterTransitionX(this.$refs.wave, 'right', 0, done)
       ])
     },
     leave(el, done) {
@@ -58,9 +61,8 @@ export default {
         this.leaveTransitionX(this.$refs.wave, 'right', 0, done)
       ])
     },
-    getScrollX() {
-      const scrollLeft = window.pageXOffset;
-      return scrollLeft;
+    getElementX() {
+      return this.$refs.carouselElement[0].$el.getBoundingClientRect().x;
     },
     getElementWidth() {
       const isMobile = window.innerWidth < 900;
@@ -81,7 +83,7 @@ export default {
       return Math.max(Math.min(n, high), low);
     },
     updateLineWidth: debounce(function() {
-      const factor = this.getScrollX();
+      const factor = this.getElementX();
       const minScroll = 0;
       const maxScroll = this.getElementWidth() - window.innerWidth;
       const minScale = 1 / data.projects.length;
@@ -92,14 +94,11 @@ export default {
   },
   mounted() {
     this.updateLineWidth();
-    document.addEventListener('scroll', () => {
-      if (this.routeMatch) this.updateLineWidth();
-    })
   },
   computed: {
     routeMatch() {
       return this.$route.path === "/carousel";
-    }
+    },
   }
 }
 </script>

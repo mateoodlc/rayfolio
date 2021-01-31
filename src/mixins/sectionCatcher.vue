@@ -18,8 +18,6 @@ export default {
             if (!element.classList.contains('scrolled')) {
               element.classList.add('scrolled');
             }
-          } else if (window.scrollY == 0) {
-            element.classList.remove('scrolled');
           }
         });
       } else {
@@ -38,11 +36,12 @@ export default {
         const elementTop = this.getOffset(element);
         if (window.scrollY > elementTop - window.innerHeight / 1.2) {
           if (!state) {
+            console.log('hi');
             this.animateLists(item, callBack);
           }
         }
-      })
-    }),  
+      });  
+    }), 
     animateLists(elementObj, callBack) {
       const {element} = elementObj
       const isDescription = element.classList.contains('content__description');
@@ -53,6 +52,7 @@ export default {
           elementObj.state = true;
         } else {
           gsap.to([titleElement, listElement], 0.4, {y: '0', opacity: 1, scaleY: '1', delay: 0.2, ease: 'power2.inOut', stagger: 0.1});
+          elementObj.state = true;
         }
       },
     getOffset(element) {

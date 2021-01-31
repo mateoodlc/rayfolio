@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="home">
-      <div class="global-container max-bound outer-pad">
+      <div class="global-container outer-pad">
         <header class="main-header">
           <img class="logo" alt="Vue logo" src="../assets/logo.svg">
           <div class="masked-animation__wrapper">
@@ -13,25 +13,20 @@
             <h1 class="masked-animation__element" ref="headingRef">Portfolio</h1>
           </div>
           <div class="masked-animation__wrapper">
-            <p ref="descriptionRefLineOne" class="home__description">UI and motion designer working in design field</p>
-          </div>
-          <div class="masked-animation__wrapper">
-            <p ref="descriptionRefLineTwo" class="home__description">since 2015.</p>
+            <p ref="descriptionRef" class="home__description"></p>
           </div>
           <div class="home-navigation">
             <div class="home-navigation__element__inner-wrapper navigation__element-reel">
               <span class="home-navigation__element__line"></span>
               <span class="home-navigation__element__hover">Play</span>
               <div class="masked-animation__wrapper" ref="reelWrapperRef">
-                <keep-alive>
-                  <router-link 
-                    to="/reel" 
-                    class="home-navigation__element masked-animation__element" 
-                    ref="reelBtnRef"
-                    @click.native="navigateReel">
-                    Motion Reel
-                  </router-link>
-                </keep-alive>
+                <router-link 
+                  to="/reel" 
+                  class="home-navigation__element masked-animation__element" 
+                  ref="reelBtnRef"
+                  @click.native="navigateReel">
+                  Motion Reel
+                </router-link>
               </div>
             </div>
             <div class="home-navigation__circle masked-animation__element" ref="wrapperRef">
@@ -39,7 +34,7 @@
                 <circle class="path" ref="circleRef" cx="50%" cy="50%" r="49%" stroke="white" stroke-width="2" fill="#141414" />
               </svg>
               <div class="home-navigation__circle__image-wrapper" ref="pictureRef">
-                <img src="../assets/download.png" alt="" srcset="">
+                <img src="../assets/home.jpg" alt="" srcset="">
               </div>
             </div>
             <div class="home-navigation__element__inner-wrapper navigation__element-design">
@@ -68,18 +63,24 @@
 // @ is an alias to /src
 import { gsap } from "gsap";
 import { getMainTimeline } from "../animations/home.js";
+import isMobileVue from '../mixins/isMobile.vue';
+import textLinesAnimationVue from "../mixins/textLinesAnimation.vue";
 export default {
   name: 'Home',
   data() {
     return {
       mainTimeline: gsap.timeline(),
-      animateElements: {}
+      animateElements: {},
+      descriptionTextMobile: 'UI and motion designer working in\ndesign field since 2015.',
+      descriptionTextDesktop: 'UI and motion designer working in design field\nsince 2015.'
     }
   },
   components: {
   },
+  mixins: [isMobileVue, textLinesAnimationVue],
   mounted() {
-    getMainTimeline(this.returnAnimateElements()).play(0.1);
+    console.log(this.isMobile)
+    getMainTimeline(this.returnAnimateElements()).add(this.animateTextLines(this.isMobile ? this.descriptionTextMobile : this.descriptionTextDesktop, this.$refs.descriptionRef, 4.7)).play(0.1);
   },
   methods: {
     returnAnimateElements() {
@@ -88,8 +89,6 @@ export default {
         circle: this.$refs.circleRef,
         picture: this.$refs.pictureRef,
         heading: this.$refs.headingRef,
-        line1: this.$refs.descriptionRefLineOne,
-        line2: this.$refs.descriptionRefLineTwo,
         designBtn: this.$refs.designBtnRef.$el,
         reelBtn: this.$refs.reelBtnRef.$el,
         about: this.$refs.aboutBtnRef.$el,
@@ -97,10 +96,10 @@ export default {
       }
     },
     navigateUI() {
-      gsap.to(this.$refs.designWrapperRef, 0.4, {y: 50, yoyo: true, repeat: 1});
+      this.isMobile ? '' : gsap.to(this.$refs.designWrapperRef, 0.4, {y: 50, yoyo: true, repeat: 1});
     },
     navigateReel() {
-      gsap.to(this.$refs.reelWrapperRef, 0.4, {y: 50, yoyo: true, repeat: 1});
+      this.isMobile ? '' : gsap.to(this.$refs.reelWrapperRef, 0.4, {y: 50, yoyo: true, repeat: 1});
     }
   }
 }
