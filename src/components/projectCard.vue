@@ -51,9 +51,10 @@ export default {
   },
   mounted() {
     const {imageRef, imageWrapperRef, lineRef, subtitleRef, titleRef, numberRef1, numberRef2} = this.$refs;
-      gsap.from(imageRef, 1.5, {y: '100%', ease: 'power3.out', delay: 1})
+    if (!this.isMobile) {
       gsap.from(imageRef, 1.5, {yPercent: -101, delay: 1, ease: 'expo.inOut'})
       gsap.from(imageWrapperRef, 1.5, {yPercent: 101, delay: 1, ease: 'expo.inOut'})
+    }
       gsap.from(lineRef, 1.5, {scaleX: '0', ease: 'power3.out', delay: 1.3});
       gsap.from(subtitleRef, 1, {y: this.isMobile ? '150%' : '100%', ease: 'power3.out', delay: 1.8});
       gsap.from(titleRef, 1, {y: '-105%', ease: 'power3.out', delay: 1.8});

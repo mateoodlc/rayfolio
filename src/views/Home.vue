@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="home">
-      <div class="global-container outer-pad">
+      <div class="global-container outer-pad" id="global-container">
         <header class="main-header">
           <img class="logo" alt="Vue logo" src="../assets/logo.svg">
           <div class="masked-animation__wrapper">
@@ -65,6 +65,7 @@ import { gsap } from "gsap";
 import { getMainTimeline } from "../animations/home.js";
 import isMobileVue from '../mixins/isMobile.vue';
 import textLinesAnimationVue from "../mixins/textLinesAnimation.vue";
+import grained from '../animations/grained';
 export default {
   name: 'Home',
   data() {
@@ -80,6 +81,7 @@ export default {
   mixins: [isMobileVue, textLinesAnimationVue],
   mounted() {
     console.log(this.isMobile)
+    grained('#global-container')
     getMainTimeline(this.returnAnimateElements()).add(this.animateTextLines(this.isMobile ? this.descriptionTextMobile : this.descriptionTextDesktop, this.$refs.descriptionRef, 4.7)).play(0.1);
   },
   methods: {

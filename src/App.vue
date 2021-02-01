@@ -5,6 +5,7 @@
     <keep-alive>
       <router-view/>
     </keep-alive>
+    <span class="noise" style="backgroundImage: url('../assets/whiteNoise.png')"></span>
   </div>
 </template>
 

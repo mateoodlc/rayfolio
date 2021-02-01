@@ -41,10 +41,11 @@ body {
     background-color: $gray;
     transform: scaleX(0);
     transition: transform .3s ease-in;
-    transform-origin: left;
+    transform-origin: right;
 }
 &:hover {
     &::before {
+      transform-origin: left;
         transform: scaleX(1);
     }
 }

@@ -1,7 +1,7 @@
 <template>
     <transition @enter="enter" @leave="leave" appear>
       <div>
-          <div class="view-wave" style="position: fixed" ref="wave"></div>
+          <div class="view-wave" id="about__view-wave" style="position: fixed" ref="wave"></div>
         <div class="about">
           <div class="about__main-container max-bound outer-pad" ref="aboutContainerRef">
             <router-link to="/" class="back-button">
@@ -77,6 +77,7 @@ import sectionCatcherVue from '../mixins/sectionCatcher.vue';
 import textCharAnimationsVue from '../mixins/textCharAnimations.vue';
 import data from "../data.json";
 import isMobileVue from '../mixins/isMobile.vue';
+import grained from '../animations/grained.js';
 export default {
     data() {
       return {
@@ -100,6 +101,7 @@ export default {
       window.addEventListener('resize', () => {
         this.windowWidth = window.innerWidth;
       })
+      grained('#about__view-wave');
     },
     methods: {
       leave(el, done) {
