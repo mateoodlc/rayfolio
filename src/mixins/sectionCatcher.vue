@@ -36,7 +36,6 @@ export default {
         const elementTop = this.getOffset(element);
         if (window.scrollY > elementTop - window.innerHeight / 1.2) {
           if (!state) {
-            console.log('hi');
             this.animateLists(item, callBack);
           }
         }

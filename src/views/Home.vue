@@ -16,8 +16,7 @@
             <p ref="descriptionRef" class="home__description"></p>
           </div>
           <div class="home-navigation">
-            <div class="home-navigation__element__inner-wrapper navigation__element-reel">
-              <span class="home-navigation__element__line"></span>
+            <div class="home-navigation__element__inner-wrapper navigation__element-reel" @mouseover="reelHovered = true" @mouseout="reelHovered = false">
               <span class="home-navigation__element__hover">Play</span>
               <div class="masked-animation__wrapper" ref="reelWrapperRef">
                 <router-link 
@@ -31,14 +30,15 @@
             </div>
             <div class="home-navigation__circle masked-animation__element" ref="wrapperRef">
               <svg height="100%" width="100%" ref="circleSvgRef">
-                <circle class="path" ref="circleRef" cx="50%" cy="50%" r="49%" stroke="white" stroke-width="2" fill="#141414" />
+                <circle class="path" ref="circleRef" cx="50%" cy="50%" r="49%" stroke="white" stroke-width="2" fill="none" />
               </svg>
+              <span class="home-navigation__element__line" :class="{'home-navigation__element__line--hovered': reelHovered}" ref="reelLine"></span>
+              <span class="home-navigation__element__line" :class="{'home-navigation__element__line--hovered': designHovered}" ref="designLine"></span>
               <div class="home-navigation__circle__image-wrapper" ref="pictureRef">
                 <img src="../assets/home.jpg" alt="" srcset="">
               </div>
             </div>
-            <div class="home-navigation__element__inner-wrapper navigation__element-design">
-              <span class="home-navigation__element__line"></span>
+            <div class="home-navigation__element__inner-wrapper navigation__element-design" @mouseover="designHovered = true" @mouseout="designHovered = false">
               <span class="home-navigation__element__hover">View</span>
               <div class="masked-animation__wrapper" ref="designWrapperRef">
                 <router-link 
@@ -65,7 +65,6 @@ import { gsap } from "gsap";
 import { getMainTimeline } from "../animations/home.js";
 import isMobileVue from '../mixins/isMobile.vue';
 import textLinesAnimationVue from "../mixins/textLinesAnimation.vue";
-import grained from '../animations/grained';
 export default {
   name: 'Home',
   data() {
@@ -73,16 +72,16 @@ export default {
       mainTimeline: gsap.timeline(),
       animateElements: {},
       descriptionTextMobile: 'UI and motion designer working in\ndesign field since 2015.',
-      descriptionTextDesktop: 'UI and motion designer working in design field\nsince 2015.'
+      descriptionTextDesktop: 'UI and motion designer working in design field\nsince 2015.',
+      reelHovered: false,
+      designHovered: false,
     }
   },
   components: {
   },
   mixins: [isMobileVue, textLinesAnimationVue],
   mounted() {
-    console.log(this.isMobile)
-    grained('#global-container')
-    getMainTimeline(this.returnAnimateElements()).add(this.animateTextLines(this.isMobile ? this.descriptionTextMobile : this.descriptionTextDesktop, this.$refs.descriptionRef, 4.7)).play(0.1);
+    getMainTimeline(this.returnAnimateElements()).add(this.animateTextLines(this.isMobile ? this.descriptionTextMobile : this.descriptionTextDesktop, this.$refs.descriptionRef, 4)).play(0.1);
   },
   methods: {
     returnAnimateElements() {
@@ -98,10 +97,10 @@ export default {
       }
     },
     navigateUI() {
-      this.isMobile ? '' : gsap.to(this.$refs.designWrapperRef, 0.4, {y: 50, yoyo: true, repeat: 1});
+      this.isMobile ? '' : gsap.to(this.$refs.designWrapperRef, 0.4, {y: 50, yoyo: true, repeatDelay: 1, repeat: 1});
     },
     navigateReel() {
-      this.isMobile ? '' : gsap.to(this.$refs.reelWrapperRef, 0.4, {y: 50, yoyo: true, repeat: 1});
+      this.isMobile ? '' : gsap.to(this.$refs.reelWrapperRef, 0.4, {y: 50, yoyo: true, repeatDelay: 1, repeat: 1});
     }
   }
 }

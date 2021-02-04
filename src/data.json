@@ -23,42 +23,42 @@
   "projects": [
     {
       "id": 1,
-      "name": "esperanza",
-      "title": "E. Gomez",
-      "subtitle": "oh, yeah",
+      "name": "fobosair",
+      "title": "FobosAir",
+      "subtitle": "UI Design - Branding - App",
       "mainImage" : "proj1-img-01.png",
       "images": [
         "proj1-img-02.png",
         "proj1-img-03.png",
         "proj1-img-04.png"
       ],
-      "description": "Raymi es un bully de la verga\npero es de las personas más\ntiernas que he conocido ever"
+      "description": "FobosAir is an application for\nbooking tickets to get a full\nexperience on Mars. I make this\nby doing research into user\nexperiences in similar apps."
     },
     {
       "id": 2,
-      "name": "alexis",
-      "title": "A. Texas",
-      "subtitle": "oh, yeah",
+      "name": "pequenin",
+      "title": "Pequenin 2021",
+      "subtitle": "UI Design - Web - App",
       "mainImage" : "proj2-img-01.png",
       "images": [
         "proj2-img-02.png",
         "proj2-img-03.png",
         "proj2-img-04.png"
       ],
-      "description": "lorem 2"
+      "description": "Re-branding of the visual\nguidelines and brand for\nPequeñin. New design for the\nwebsite of Pequeñin."
     },
     {
       "id": 3,
-      "name": "lexi",
-      "title": "L. Anne",
-      "subtitle": "oh, yeah",
+      "name": "factory",
+      "title": "Factory",
+      "subtitle": "UX Design - UI Design - App",
       "mainImage" : "proj3-img-01.png",
       "images": [
         "proj3-img-02.png",
         "proj3-img-03.png",
         "proj3-img-04.png"
       ],
-      "description": "lorem 3"
+      "description": "Factory is a local family business\nwith a need to enter the e&#8209;commerce model. I start from\nscratch. From the redesign of\nthe brand to the whole app UI/UX."
     }
   ]
 }

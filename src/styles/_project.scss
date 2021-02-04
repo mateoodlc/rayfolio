@@ -5,7 +5,7 @@
  width: 100%;
  transform: translateX(-50%);
  z-index: 2;
- padding-bottom: rem(438);
+ padding-bottom: rem(0);
  overflow-x: hidden;
  box-shadow: 0 -5px 10px 2px rgba($color: $black, $alpha: 0.2);
  .project-background {
@@ -42,7 +42,12 @@
     width: 100vw;
     height: 100%;
     overflow: scroll;
-    overflow-x: hidden;
+    overflow: hidden;
+    background-color: $white;
+    padding-bottom: rem(64);
+    &.outer-pad {
+        padding-bottom: rem(64);
+    }
 }
 
 .project__inner-wrapper {
@@ -69,6 +74,12 @@
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: $yellow;
  }
+}
+
+.project__hero__text-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .project__hero__titlle-marker {
@@ -177,10 +188,11 @@ img {
 @media (max-width: 1200px) {
  .project__hero__title h1 {
   font-size: rem(48);
+  margin-bottom: rem(16);
  }
  .project__hero__description {
   span {
-   font-size: rem(18);
+   font-size: rem(16);
   }
  }
 }
@@ -249,7 +261,7 @@ img {
 
 @media (max-width: 600px) {
     .project .back-button {
-        left: rem(-16);
+        left: rem(16);
     }
     .project__wrapper {
         width: 100%;

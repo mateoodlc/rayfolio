@@ -47,9 +47,26 @@
                 <div class="about__me__items scrollable">
                   <div class="about__me-title"><h3>Find me on</h3></div>
                   <ul class="about__me__item-list">
-                    <li class="social"><strong>Behance</strong></li>
-                    <li class="social"><strong>Dribbble</strong></li>
-                    <li class="social"><strong>Instagram</strong></li>
+                    <li class="social">
+                      <a href="https://www.behance.net/raymicfc" target="_blank">
+                        <strong>Behance</strong>
+                      </a>
+                    </li>
+                    <li class="social">
+                      <a href="https://dribbble.com/raymicfc" target="_blank">
+                        <strong>Dribbble</strong>
+                      </a>
+                    </li>
+                    <li class="social">
+                      <a href="https://www.instagram.com/raymicfc" target="_blank">
+                        <strong>Instagram</strong>
+                      </a>
+                    </li>
+                    <li class="social">
+                      <a href="https://www.linkedin.com/mwlite/in/raymicfc" target="_blank">
+                        <strong>LinkedIn</strong>
+                      </a>
+                    </li>
                   </ul>
                 </div>
                 <div class="about__me__items scrollable">
@@ -77,7 +94,6 @@ import sectionCatcherVue from '../mixins/sectionCatcher.vue';
 import textCharAnimationsVue from '../mixins/textCharAnimations.vue';
 import data from "../data.json";
 import isMobileVue from '../mixins/isMobile.vue';
-import grained from '../animations/grained.js';
 export default {
     data() {
       return {
@@ -93,7 +109,6 @@ export default {
     },
     mixins: [animations, hasHistoryVue, textLinesAnimationVue, textCharAnimationsVue, sectionCatcherVue, isMobileVue],
     mounted() {
-      console.log(this.isMobile);
       this.scrollableElements = Array.from(document.querySelectorAll('.scrollable')).map((element) => {
         return {element, state: false}
       });
@@ -101,7 +116,6 @@ export default {
       window.addEventListener('resize', () => {
         this.windowWidth = window.innerWidth;
       })
-      grained('#about__view-wave');
     },
     methods: {
       leave(el, done) {
@@ -117,7 +131,7 @@ export default {
             ...this.setEntryTimeline(),
           ]  
         )
-        this.mainTimeline.play()
+        this.mainTimeline.play();
       },
       setEntryTimeline() {
         const {imageRef, aboutTitle, blockquoteRef, citeRef, descriptionRef__mobile, aboutContainerRef, backRef} = this.$refs;

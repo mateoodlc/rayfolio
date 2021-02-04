@@ -1,17 +1,16 @@
 <template>
     <transition @enter="enter" @leave="leave" appear>
-        <div class="project outer-pad" ref="projectRef">
-            <div class="view-wave view-wave--project" ref="wave"></div>
-            <div class="project__wrapper max-bound max-bound--project">
+        <div class="project" ref="projectRef">
+            <div class="project__wrapper outer-pad outer-pad--large max-bound--project" ref="projectWrapperRef" id="projectWrapperId">
                 <div class="project__inner-wrapper" ref="projectContentWrapperRef">
                     <div class="project__hero">
                         <div class="project__hero__text-content">
                             <div class="project__hero__title">
                                 <div class="h1 project__hero__title-marker" ref="heroTitleMarkerRef">
                                     <span class="bordered-heading" ref="number1">0</span>
-                                    <span class="bordered-heading" ref="number2">1</span>
+                                    <span class="bordered-heading" ref="number2">{{this.computedData.id}}</span>
                                 </div>
-                                <h1 ref="projectTitleRef">Big Ass {{this.computedData ? this.computedData.name : ''}}</h1>
+                                <h1 ref="projectTitleRef">{{this.computedData.title}}</h1>
                             </div>
                             <div class="project__hero__description">
                                 <p ref="descriptionRef"></p>
@@ -57,7 +56,7 @@ export default {
     },
     data() {
         return {
-            tl: gsap.timeline({delay: 0.5}),
+            tl: undefined,
             imageElements: undefined,
             publicPath: 'https://mateoodlc.github.io/assets/'
         }
@@ -65,45 +64,54 @@ export default {
     mixins: [animationsVue, hasHistoryVue, textLinesAnimationVue, sectionCatcher],
     methods: {
         enter(el, done) {
-            gsap.from(this.$refs.wave, 1, {scaleY: 0, delay: 0, ease: 'power3.out'}),
-            this.entryAnimation();
-            done();
+            this.tl = gsap.timeline({onComplete: done}).add(this.entryAnimation(false))
         },
         leave(el, done) {
-            gsap.to(this.$refs.projectContentWrapperRef, 0.3, {opacity: 0});
-            this.leaveTransitionY(this.$refs.wave, 'bottom', 0.2, done);
+            this.leaveAnimation(done)
         },
-        leaveAnimation() {
-            gsap.to(this.$refs.projectContentWrapperRef, 0.1, {opacity: 0});
+        leaveAnimation(done) {
+            const {projectWrapperRef, projectRef, projectContentWrapperRef} = this.$refs;
+            gsap.to(projectContentWrapperRef, 0.1, {opacity: 0});
+            gsap.to(projectRef, 1.5, {yPercent: 101, delay: 0.3, ease: 'expo.inOut'});
+            gsap.to(projectWrapperRef, 1.5, {yPercent: -101, delay: 0.3, ease: 'expo.inOut', onComplete: done});
         },
-        entryAnimation() {
-            const {descriptionRef, heroImageRef, heroImageWrapperRef, projectTitleRef, backRef, number1, number2, projectContentWrapperRef} = this.$refs;
-            gsap.to(projectContentWrapperRef, 0, {opacity: 1});
-            if (this.isMobile) {
-                gsap.from(heroImageRef, 1, {opacity: 0, delay: 1})
-            } else {
-                gsap.from(heroImageRef, 1, {xPercent: -101, delay: 1, ease: 'expo.inOut'})
-                gsap.from(heroImageWrapperRef, 1, {xPercent: 101, delay: 1, ease: 'expo.inOut'})
-            }
-            gsap.from([number1, number2], 0.5, {translateY: '1.25rem', opacity: 0, stagger: 0.1, delay: 1}),
-            gsap.from(projectTitleRef, 0.5, {translateY: '100%', opacity: 0, delay: 1.2, ease: 'power3.inOut'}),
-            gsap.from(backRef, 0.5, {translateY: '100%', opacity: 0, delay: 0.9, ease: 'power3.inOut'}),
-            this.animateTextLines(this.computedData.description, descriptionRef, 1.6);
+        entryAnimation(navigating) {
+            const {descriptionRef, heroImageRef, heroImageWrapperRef, projectTitleRef, backRef, number1, number2, projectWrapperRef, projectContentWrapperRef, projectRef} = this.$refs;
+            gsap.to(projectContentWrapperRef, 0.2, {opacity: 1})
+            let heroImageTween = [
+                this.isMobile ? gsap.from(heroImageRef, 1, {opacity: 0, delay: 1.5}) :
+                gsap.from(heroImageRef, 1.5, {xPercent: -101, delay: 1, ease: 'expo.inOut'}),
+                gsap.from(heroImageWrapperRef, 1.5, {xPercent: 101, delay: 1, ease: 'expo.inOut'})
+            ]
+            const tl = gsap.timeline({}).add([
+                !navigating ? gsap.from(projectRef, 1.5, {y: '101vh', delay: 0, ease: 'expo.inOut'}) : '',
+                !navigating ? gsap.from(projectWrapperRef, 1.5, {y: '-101vh', delay: 0, ease: 'expo.inOut'}) : '',
+                gsap.from([number1, number2], 0.5, {y: '1.25rem', opacity: 0, stagger: 0.1, delay: 1}),
+                heroImageTween,
+                gsap.fromTo(projectTitleRef, 0.5, {y: '100%', opacity: 0}, {y: '0', opacity: 1, delay: 1.2, ease: 'power3.inOut'}),
+                gsap.from(backRef, 0.5, {y: '100%', opacity: 0, delay: 0.9, ease: 'power3.inOut'}),
+                this.animateTextLines(this.computedData.description, descriptionRef, 1.6)
+            ])
+            return tl;
+        },
+        nextProjectTransition(callback) {
+            return gsap.to(this.$refs.projectContentWrapperRef, 0.1, {opacity: 0, onComplete: callback})
         },
         goToNext() {
-            this.$router.push(this.returnNextPage).catch(err => {
+            const navigate = () => this.$router.push(this.returnNextPage).catch(err => {
                 if (err.name !== 'NavigationDuplicated' && !err.message.includes('Avoided redundant navigation to current location')) {
                     // But print any other errors to the console
                 }
             });
+            this.nextProjectTransition(navigate);
+            setTimeout(() => {
+                this.imageElements.forEach(element => {
+                    if (element.classList.contains('scrolled')) element.classList.remove('scrolled');
+                });
+                this.entryAnimation(true);
+                window.scrollTo({top: 0});
+            }, 250)
         },
-        scrollToTop() {
-            document.body.scrollTop = 0;
-        },
-        addScrolledClass(element) {
-            console.log(element)
-            if (!element.classList.contains('scrolled')) element.classList.add('scrolled');
-        }
     },
     computed: {
         computedData() {
@@ -117,9 +125,7 @@ export default {
         returnNextPage() {
             const currentId = this.computedData.id;
             const projectsFinished = currentId + 1 > data.projects.length;
-            console.log(currentId)
             if (projectsFinished) {
-                console.log(data.projects)
                 return data.projects[0].name;
             }
             const nextPageId = currentId + 1;
@@ -131,14 +137,7 @@ export default {
     },
     watch: {
         currentName() {
-            this.imageElements.forEach(element => {
-                if (element.classList.contains('scrolled')) element.classList.remove('scrolled');
-            });
-            this.leaveAnimation();
-            setTimeout(() => {
-                this.entryAnimation();
-                window.scrollTo({top: 0});
-            }, 250)
+
         }
     },
     mounted() {
@@ -146,6 +145,6 @@ export default {
         window.addEventListener("scroll", () => {
             this.sectionCatcher(this.imageElements);
         })
-    }
+    },
 }
 </script>

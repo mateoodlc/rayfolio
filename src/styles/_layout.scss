@@ -44,12 +44,25 @@
 .outer-pad {
  &.outer-pad--large {
   padding: 0 rem(272);
-  padding-right: 0;
  }
 }
 
+@media (max-width: 1600px) {
+   .outer-pad.outer-pad--large {
+      padding: 0 rem(100);
+     }
+  }
 @media (max-width: 1364px) {
  .outer-pad {
   padding: 0 rem(100);
+}
+}
+
+@media (max-width: 900px) {
+ .outer-pad {
+  padding: 0 rem(32);
+  &.outer-pad--large {
+     padding: 0 rem(32);
+    }
  }
 }

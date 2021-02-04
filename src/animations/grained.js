@@ -1,11 +1,11 @@
 let options = {
     animate: true,
-    patternWidth: 100,
-    patternHeight: 100,
+    patternWidth: 300,
+    patternHeight: 300,
     grainOpacity: 0.05,
-    grainDensity: 1.5,
-    grainWidth: 1,
-    grainHeight: 1
+    grainDensity: 2,
+    grainWidth: 2,
+    grainHeight: 2
   };
 
   // eslint-disable-next-line no-undef

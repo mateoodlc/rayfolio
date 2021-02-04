@@ -9,6 +9,7 @@
 
 div#about__view-wave {
     position: fixed !important;
+    z-index: 1;
 }
 
 .about__main-container {
@@ -86,7 +87,7 @@ div#about__view-wave {
 
 .about__content {
  position: relative;
- margin-top: rem(280);
+ margin-top: 10vw;
 }
 
 .content__description {
@@ -148,6 +149,11 @@ div#about__view-wave {
   margin-bottom: rem(12);
   font-weight: 300;
   font-size: calc(16px + (18 - 16) * ((100vw - 300px) / (1600 - 300)));
+  a {
+    color: $black;
+    font-weight: 300;
+    font-size: calc(16px + (18 - 16) * ((100vw - 300px) / (1600 - 300)));
+  }
  }
  &:last-of-type {
   margin-bottom: 0;
