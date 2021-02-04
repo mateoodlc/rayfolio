@@ -12,7 +12,7 @@
               <div class="content__description" v-show="isMobile">
                 <p ref="descriptionRef__mobile"></p>
               </div>
-              <div class="about__image">
+              <div class="about__image" ref="imageWrapperRef">
                 <img src="../assets/about.jpg" ref="imageRef" alt="" srcset="">
               </div>
               <div class="about__inspirational-phrase">
@@ -134,11 +134,12 @@ export default {
         this.mainTimeline.play();
       },
       setEntryTimeline() {
-        const {imageRef, aboutTitle, blockquoteRef, citeRef, descriptionRef__mobile, aboutContainerRef, backRef} = this.$refs;
+        const {imageRef, imageWrapperRef, aboutTitle, blockquoteRef, citeRef, descriptionRef__mobile, aboutContainerRef, backRef} = this.$refs;
           return [
           gsap.from(aboutContainerRef, 0, {opacity: 0, delay: 0.6}),
           gsap.from(backRef, 0.5, {y: '100px', opacity: 0, delay: 1.5}),
-          gsap.from(imageRef, 0.9, {y: '100%', delay: 0.8, ease: 'power4.inOut'}),
+          gsap.from(imageWrapperRef, 0.9, {yPercent: '101', delay: 0.8, ease: 'power4.inOut'}),
+          gsap.from(imageRef, 0.9, {yPercent: '-101', delay: 0.8, ease: 'power4.inOut'}),
           this.breakAllTitles(aboutTitle, 1),
           this.isMobile ? this.animateTextLines(this.description, descriptionRef__mobile, 1) : '',
           this.animateTextLines(this.quote, blockquoteRef, 1),

@@ -1,7 +1,7 @@
 <template>
-  <div id="app"> 
-    <div class="pointer-circle" ref="circleRef" :class="{'dark': this.$route.path !== '/' && this.$route.path !== 'reel'}"></div>
-    <div class="pointer" :class="{'dark': this.$route.path !== '/' && this.$route.path !== 'reel'}" ref="pointer"></div>
+  <div id="app" ref="app"> 
+    <div class="pointer-circle" ref="circleRef" :class="[{'dark': this.$route.path !== '/' && this.$route.path !== 'reel'}, {'fixed' : this.isCarouselPage}]"></div>
+    <div class="pointer" :class="[{'dark': this.$route.path !== '/' && this.$route.path !== 'reel'}, {'fixed' : this.isCarouselPage}]" ref="pointer"></div>
     <keep-alive>
       <router-view/>
     </keep-alive>
@@ -53,6 +53,9 @@ export default {
       window.addEventListener("mousemove", event => {
         this.followPointer(event);
       });
+      window.addEventListener('scroll', () => {
+        this.addScrollToPointer();
+      })
     },
     followPointer(e) {
       this.rawX = e.clientX;
@@ -60,16 +63,29 @@ export default {
       this.halfW = window.innerWidth / 2;
       this.halfH = window.innerHeight / 2 - window.scrollY;
       gsap.to(this.$refs.circleRef, 1, {
-        x: this.rawX - this.halfW,
-        y: this.rawY - this.halfH,
+        left: this.rawX - this.$refs.circleRef.clientWidth / 2,
+        top: this.rawY - this.$refs.circleRef.clientHeight / 2 + (this.isCarouselPage ? 0 : window.scrollY),
         ease: 'power4.out'
       });
       gsap.to(this.$refs.pointer, 0, {
-        x: this.rawX - this.halfW,
-        y: this.rawY - this.halfH,
+        left: this.rawX,
+        top: this.rawY - this.$refs.pointer.clientHeight / 2 + (this.isCarouselPage ? 0 : window.scrollY),
         ease: 'power4.out'
       });
     },
+    addScrollToPointer() {
+      /* gsap.to(this.$refs.circleRef, 0, {
+        top: window.innerHeight / 2 + window.scrollY,
+      });
+      gsap.to(this.$refs.pointer, 0, {
+        top: window.innerHeight / 2 + window.scrollY,
+      }); */
+    }
+  },
+  computed: {
+    isCarouselPage() {
+      return this.$route.path === '/carousel';
+    }
   }
 }
 </script>

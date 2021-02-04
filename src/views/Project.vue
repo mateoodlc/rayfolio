@@ -1,7 +1,7 @@
 <template>
     <transition @enter="enter" @leave="leave" appear>
         <div class="project" ref="projectRef">
-            <div class="project__wrapper outer-pad outer-pad--large max-bound--project" ref="projectWrapperRef" id="projectWrapperId">
+            <div class="project__wrapper outer-pad outer-pad--large max-bound--project" ref="projectWrapperRef" @scroll.passive="sectionCatcher(imageElements);" id="projectWrapperId">
                 <div class="project__inner-wrapper" ref="projectContentWrapperRef">
                     <div class="project__hero">
                         <div class="project__hero__text-content">
@@ -109,7 +109,7 @@ export default {
                     if (element.classList.contains('scrolled')) element.classList.remove('scrolled');
                 });
                 this.entryAnimation(true);
-                window.scrollTo({top: 0});
+                this.$refs.projectWrapperRef.scrollTo({top: 0});
             }, 250)
         },
     },

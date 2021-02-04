@@ -1,5 +1,5 @@
 .project {
- position: absolute;
+ position: fixed;
  top: 0;
  left: 50%;
  width: 100%;
@@ -40,9 +40,8 @@
 
 .project__wrapper {
     width: 100vw;
-    height: 100%;
-    overflow: scroll;
-    overflow: hidden;
+    height: 101vh;
+    overflow-y: scroll;
     background-color: $white;
     padding-bottom: rem(64);
     &.outer-pad {
